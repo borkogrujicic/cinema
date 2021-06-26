@@ -1,13 +1,18 @@
 package com.ftninformatika.jwd.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Projekcija {
@@ -30,6 +35,9 @@ public class Projekcija {
     
     @Column
     private double cena;
+    
+    @OneToMany(mappedBy = "projekcija", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List <Karta> karte = new ArrayList<>();
 
 	public Projekcija() {
 		super();
@@ -82,9 +90,14 @@ public class Projekcija {
 	public void setCena(double cena) {
 		this.cena = cena;
 	}
-    
-    
-    
+
+	public List<Karta> getKarte() {
+		return karte;
+	}
+
+	public void setKarte(List<Karta> karte) {
+		this.karte = karte;
+	}
     
 
 }
