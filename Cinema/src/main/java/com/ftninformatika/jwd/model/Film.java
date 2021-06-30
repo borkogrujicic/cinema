@@ -26,10 +26,10 @@ public class Film {
     private String reziser;
     
     @Column
-    private List <String> glumci = new ArrayList<>();
+    private String glumci;
     
     @Column
-    private List <String> zanrovi = new ArrayList<>();
+    private String zanrovi;
     
     @Column
     private int trajanje;
@@ -77,19 +77,19 @@ public class Film {
 		this.reziser = reziser;
 	}
 
-	public List<String> getGlumci() {
+	public String getGlumci() {
 		return glumci;
 	}
 
-	public void setGlumci(List<String> glumci) {
+	public void setGlumci(String glumci) {
 		this.glumci = glumci;
 	}
 
-	public List<String> getZanrovi() {
+	public String getZanrovi() {
 		return zanrovi;
 	}
 
-	public void setZanrovi(List<String> zanrovi) {
+	public void setZanrovi(String zanrovi) {
 		this.zanrovi = zanrovi;
 	}
 

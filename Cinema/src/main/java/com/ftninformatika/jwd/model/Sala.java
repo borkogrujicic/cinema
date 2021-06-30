@@ -1,7 +1,9 @@
 package com.ftninformatika.jwd.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -19,10 +21,10 @@ public class Sala {
     @ManyToMany
     @JoinTable(name = "sala_tip", joinColumns = @JoinColumn(name = "sala_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tip_id", referencedColumnName = "id"))
-    private List <Tip> tipovi = new ArrayList<>();
+    private Set <Tip> tipovi = new HashSet<>();
     
     @OneToMany(mappedBy = "sala", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List <Sediste> sedista = new ArrayList<>();
+    private Set <Sediste> sedista = new HashSet<>();
     
     
     @OneToMany(mappedBy = "sala", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -54,22 +56,22 @@ public class Sala {
 	}
 
 
-	public List<Tip> getTipovi() {
+	public Set<Tip> getTipovi() {
 		return tipovi;
 	}
 
 
-	public void setTipovi(List<Tip> tipovi) {
+	public void setTipovi(Set<Tip> tipovi) {
 		this.tipovi = tipovi;
 	}
 
 
-	public List<Sediste> getSedista() {
+	public Set<Sediste> getSedista() {
 		return sedista;
 	}
 
 
-	public void setSedista(List<Sediste> sedista) {
+	public void setSedista(Set<Sediste> sedista) {
 		this.sedista = sedista;
 	}
 

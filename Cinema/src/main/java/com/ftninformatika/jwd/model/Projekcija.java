@@ -2,7 +2,9 @@ package com.ftninformatika.jwd.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -37,7 +42,12 @@ public class Projekcija {
     private double cena;
     
     @OneToMany(mappedBy = "projekcija", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List <Karta> karte = new ArrayList<>();
+    private Set <Karta> karte = new HashSet<>();
+    
+    @ManyToMany
+    @JoinTable(name = "projekcija_tip", joinColumns = @JoinColumn(name = "projekcija_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tip_id", referencedColumnName = "id"))
+    private List <Tip> tipovi = new ArrayList<>();
 
 	public Projekcija() {
 		super();
@@ -91,13 +101,23 @@ public class Projekcija {
 		this.cena = cena;
 	}
 
-	public List<Karta> getKarte() {
+	public Set<Karta> getKarte() {
 		return karte;
 	}
 
-	public void setKarte(List<Karta> karte) {
+	public void setKarte(Set<Karta> karte) {
 		this.karte = karte;
 	}
+
+	public List<Tip> getTipovi() {
+		return tipovi;
+	}
+
+	public void setTipovi(List<Tip> tipovi) {
+		this.tipovi = tipovi;
+	}
+	
+	
     
 
 }

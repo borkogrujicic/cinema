@@ -22,7 +22,7 @@ public class SalaToSalaDto implements Converter <Sala, SalaDTO>{
 		SalaDTO dto = new SalaDTO();
 		dto.setId(sala.getId());
 		dto.setNaziv(sala.getNaziv());
-		List <Sediste> sedista = sala.getSedista();
+		List <Sediste> sedista = new ArrayList<>(sala.getSedista());
 		dto.setSedista(toDto.convert(sedista));;
 		return dto;
 	}

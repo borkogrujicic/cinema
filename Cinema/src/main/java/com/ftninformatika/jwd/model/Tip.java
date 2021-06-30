@@ -1,7 +1,9 @@
 package com.ftninformatika.jwd.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,9 +26,9 @@ public class Tip {
     private String naziv;
     
     @ManyToMany(mappedBy = "tipovi",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List <Sala> sale = new ArrayList<>();
+    private Set <Sala> sale = new HashSet<>();
     
-    @ManyToMany(mappedBy = "tipovi",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "tip",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List <Projekcija> projekcije = new ArrayList<>();
 
 	public Tip() {
@@ -49,11 +51,11 @@ public class Tip {
 		this.naziv = naziv;
 	}
 
-	public List<Sala> getSale() {
+	public Set<Sala> getSale() {
 		return sale;
 	}
 
-	public void setSale(List<Sala> sale) {
+	public void setSale(Set<Sala> sale) {
 		this.sale = sale;
 	}
 
@@ -64,9 +66,6 @@ public class Tip {
 	public void setProjekcije(List<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
-    
-    
-    
-    
+       
 
 }

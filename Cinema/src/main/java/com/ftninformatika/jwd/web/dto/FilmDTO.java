@@ -8,8 +8,8 @@ public class FilmDTO {
 	private Long id;
 	private String naziv;
 	private String reziser;
-	private List <String> glumci = new ArrayList<>();
-	private List <String> zanrovi = new ArrayList<>();
+	private String glumci;
+	private String zanrovi;
 	private int trajanje;
 	private String distributer;
 	private String zemljaPorekla;
@@ -44,19 +44,19 @@ public class FilmDTO {
 		this.reziser = reziser;
 	}
 
-	public List<String> getGlumci() {
+	public String getGlumci() {
 		return glumci;
 	}
 
-	public void setGlumci(List<String> glumci) {
+	public void setGlumci(String glumci) {
 		this.glumci = glumci;
 	}
 
-	public List<String> getZanrovi() {
+	public String getZanrovi() {
 		return zanrovi;
 	}
 
-	public void setZanrovi(List<String> zanrovi) {
+	public void setZanrovi(String zanrovi) {
 		this.zanrovi = zanrovi;
 	}
 
