@@ -1,6 +1,7 @@
 package com.ftninformatika.jwd.support;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SalaToSalaDto implements Converter <Sala, SalaDTO>{
 		dto.setId(sala.getId());
 		dto.setNaziv(sala.getNaziv());
 		List <Sediste> sedista = new ArrayList<>(sala.getSedista());
-		dto.setSedista(toDto.convert(sedista));;
+		dto.setSedista(new HashSet <>(toDto.convert(sedista)));;
 		return dto;
 	}
 	

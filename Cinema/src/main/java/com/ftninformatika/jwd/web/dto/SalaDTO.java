@@ -1,13 +1,15 @@
 package com.ftninformatika.jwd.web.dto;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class SalaDTO {
 	
 	private Long id;
 	private String naziv;
-	private List <SedisteDTO> sedista = new ArrayList<>();
+	private Set <SedisteDTO> sedista = new HashSet<>();
 	
 	
 	public SalaDTO() {
@@ -30,11 +32,11 @@ public class SalaDTO {
 		this.naziv = naziv;
 	}
 
-	public List<SedisteDTO> getSedista() {
+	public Set<SedisteDTO> getSedista() {
 		return sedista;
 	}
 
-	public void setSedista(List<SedisteDTO> sedista) {
+	public void setSedista(Set<SedisteDTO> sedista) {
 		this.sedista = sedista;
 	}
 	

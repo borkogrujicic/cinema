@@ -13,14 +13,12 @@ import com.ftninformatika.jwd.web.dto.SedisteDTO;
 @Component
 public class SedisteToSedisteDto implements Converter <Sediste, SedisteDTO>{
 	
-	@Autowired
-	private SalaToSalaDto toDto;
+
 
 	@Override
 	public SedisteDTO convert(Sediste sediste) {
 		SedisteDTO dto = new SedisteDTO();
 		dto.setRedniBroj(sediste.getRedniBroj());
-		dto.setSala(toDto.convert(sediste.getSala()));
 		return dto;
 	}
 	

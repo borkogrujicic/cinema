@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Tip {
@@ -28,7 +29,7 @@ public class Tip {
     @ManyToMany(mappedBy = "tipovi",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Set <Sala> sale = new HashSet<>();
     
-    @ManyToMany(mappedBy = "tip",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tip", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List <Projekcija> projekcije = new ArrayList<>();
 
 	public Tip() {
