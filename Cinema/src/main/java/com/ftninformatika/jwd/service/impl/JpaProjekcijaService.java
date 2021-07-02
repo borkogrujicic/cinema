@@ -1,5 +1,8 @@
 package com.ftninformatika.jwd.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftninformatika.jwd.model.Projekcija;
+import com.ftninformatika.jwd.model.Sala;
 import com.ftninformatika.jwd.repository.ProjekcijaRepository;
 import com.ftninformatika.jwd.service.ProjekcijaService;
 
@@ -28,6 +32,12 @@ public class JpaProjekcijaService implements ProjekcijaService{
 
 	@Override
 	public Projekcija save(Projekcija projekcija) {
+		
+		Sala sala = projekcija.getSala();
+		List <Projekcija> projekcije = sala.getProjekcije();
+		for (int i = 0; i < projekcije.size(); i++) {
+			
+		}
 		return projekcijaRepository.save(projekcija);
 	}
 
