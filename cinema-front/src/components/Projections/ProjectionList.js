@@ -1,7 +1,24 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
+import FrontAxios from "../../apis/FrontAxios";
 
 const Projections = (props) => {
+
+  const remove = id => {
+    FrontAxios.delete("/projekcije/" + id)
+    .then((res) => {
+      // handle success
+      console.log(res);
+      alert("Projection was deleted successfully!");
+      window.location.reload();
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+      alert("Error occured please try again!");
+    });
+  }
+
   return (
     <div>
       <h1>Projekcije</h1>
@@ -24,6 +41,7 @@ const Projections = (props) => {
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>
               <td>{projection.cena}</td>
+              <td><Button onClick={() => remove(projection.id)}>Delete</Button></td>
             </tr>
           ))}
         </tbody>

@@ -10,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Film {
@@ -46,8 +46,8 @@ public class Film {
     @Column
     private String opis;
     
-    @ManyToMany(mappedBy = "film",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List <Projekcija> projekcije = new ArrayList<>();
+    @OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Projekcija> projekcije = new ArrayList<>();
 
 	public Film() {
 		super();
@@ -140,11 +140,5 @@ public class Film {
 	public void setProjekcije(List<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
-    
-    
-    
-    
-    
-    
 
 }

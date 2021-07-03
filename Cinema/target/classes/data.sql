@@ -34,7 +34,8 @@ INSERT INTO film (`id`, `distributer`, `glumci`, `godina_proizvodnje`, `naziv`, 
 INSERT INTO film (`id`, `distributer`, `glumci`, `godina_proizvodnje`, `naziv`, `opis`, `reziser`, `trajanje`, `zanrovi`, `zemlja_porekla`) VALUES (2, 'Walt Disney', '/', '2021', 'Zlica', 'Film', 'Craig Gillespie', 120, 'Deciji', 'USA');
 
 INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (1, '250', '2020-06-21 20:00', 1, 1, 1);
-INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (2, '350', '2020-06-21 22:00', 1, 1, 2);
+INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (2, '350', '2020-06-21 22:00', 2, 1, 2);
+INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (3, '350', '2020-06-22 22:00', 2, 2, 2);
 
 
 

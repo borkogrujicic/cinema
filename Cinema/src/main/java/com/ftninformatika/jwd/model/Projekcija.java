@@ -18,8 +18,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(name="UniqueDatumIVremeAndSala", columnNames = {"datum_vreme", "sala_id"}))
 public class Projekcija {
 	
     @Id
@@ -115,6 +118,10 @@ public class Projekcija {
 
 	public void setTipovi(List<Tip> tipovi) {
 		this.tipovi = tipovi;
+	}
+	
+	public void dodajKartu (Karta karta) {
+		karte.add(karta);
 	}
 	
 	

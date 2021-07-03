@@ -72,9 +72,9 @@ public class ProjekcijeController {
     
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
-        Projekcija obrisanProjekcija = projekcijaService.delete(id);
+        Projekcija obrisanaProjekcija = projekcijaService.delete(id);
 
-        if(obrisanProjekcija != null) {
+        if(obrisanaProjekcija != null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

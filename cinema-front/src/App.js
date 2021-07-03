@@ -11,6 +11,7 @@ import Projections from "./components/Projections/Projections";
 import Movies from "./components/Movies/Movies";
 
 const App = () => {
+
   return (
     <div>
       <Router>

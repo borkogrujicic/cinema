@@ -1,10 +1,6 @@
 package com.ftninformatika.jwd.service.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,10 +39,17 @@ public class JpaProjekcijaService implements ProjekcijaService{
 
 	@Override
 	public Projekcija delete(Long id) {
-		Optional <Projekcija> projekcija = projekcijaRepository.findById(id);
-		if (projekcija.isPresent()) {
+		Projekcija projekcija = projekcijaRepository.findOneById(id);
+		if (projekcija != null) {
+			projekcija.getFilm().getProjekcije().remove(projekcija);
+			projekcija.setFilm(null);
+			projekcija.getSala().getProjekcije().remove(projekcija);
+			projekcija.setSala(null);
+			projekcija.getTip().getProjekcije().remove(projekcija);
+			projekcija.setTip(null);
+			projekcija = projekcijaRepository.save(projekcija);
 			projekcijaRepository.deleteById(id);
-			return projekcija.get();
+			return projekcija;
 		}
 		return null;
 	}
