@@ -1,8 +1,5 @@
 package com.ftninformatika.jwd.web.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FilmDTO {
 	
 	private Long id;
@@ -99,8 +96,6 @@ public class FilmDTO {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-	
-	
-	
+		
 
 }
