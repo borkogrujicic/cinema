@@ -6,7 +6,7 @@ const MoviesList = (props) => {
     <div>
       <h1>Filmovi</h1>
 
-      <Table bordered striped style={{ marginTop: 5 }}>
+      <Table striped bordered hover variant="dark">
         <thead className="thead-dark">
           <tr key="nesto">
             <th>Naziv</th>

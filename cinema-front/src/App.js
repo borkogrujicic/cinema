@@ -12,13 +12,12 @@ import Movies from "./components/Movies/Movies";
 
 
 const App = () => {
-
   return (
     <div>
       <Router>
       <Navbar  bg="dark" variant="dark" expand>
           <Navbar.Brand as={Link} to="/">
-                JWD
+                Home
               </Navbar.Brand>
               {/*className="mr-auto" podesi ovu grupu Nav Link-ova da se "rasire" sto je vise moguce,
               i zbog toga je dugme Log in/Log out skroz sa leve strane*/}

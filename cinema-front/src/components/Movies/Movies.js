@@ -15,13 +15,13 @@ const Movies = () => {
       .then((res) => {
         console.log(res);
 
-        alert("Uspesno dodat film");
+        alert("Uspesno ste dodali film!");
         window.location.reload()
       })
       .catch((error) => {
         console.log(error);
 
-        alert("Error! Neuspesno dodavanje filma");
+        alert("Greska! Neuspesno dodavanje filma");
       });
   };
 
