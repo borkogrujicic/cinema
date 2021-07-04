@@ -8,7 +8,7 @@ const MoviesList = (props) => {
 
       <Table bordered striped style={{ marginTop: 5 }}>
         <thead className="thead-dark">
-          <tr>
+          <tr key="nesto">
             <th>Naziv</th>
             <th>Trajanje</th>
             <th>Reziser</th>           

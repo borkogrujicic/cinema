@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import { Row, Col, Button, Form, Collapse } from "react-bootstrap";
 
 const AddMovieForm = (props) => {
   const [naziv, setNaziv] = useState("");
@@ -11,6 +11,7 @@ const AddMovieForm = (props) => {
   const [zemljaPorekla, setZemljaPorekla] = useState("");
   const [godinaProizvodnje, setGodinaProizvodnje] = useState("");
   const [opis, setOpis] = useState("");
+  const [hideAddForm, setHideAddForm] = useState(false);
 
   const nazivChangeHandler = (event) => {
     setNaziv(event.target.value);
@@ -81,9 +82,17 @@ const AddMovieForm = (props) => {
         <Col></Col>
         <Col xs="12" sm="10" md="8">
           <h1>Dodaj film</h1>
-
+          <Form.Group style={{ marginTop: 35 }}>
+              <Form.Check
+                type="checkbox"
+                label="Show add form"
+                onClick={(event) =>
+                  setHideAddForm(event.target.checked)
+                }
+              />
+              </Form.Group>
+              <Collapse in={hideAddForm}>
           <Form>
-            <Form.Group>
               <Form.Label htmlFor="pNaziv">Naziv filma</Form.Label>
               <Form.Control
                 id="pNaziv"
@@ -92,7 +101,6 @@ const AddMovieForm = (props) => {
                 onChange={nazivChangeHandler}
               />{" "}
               <br />
-            </Form.Group>
             <Form.Group>
               <Form.Label htmlFor="pReziser">Reziser</Form.Label>
               <Form.Control
@@ -177,9 +185,11 @@ const AddMovieForm = (props) => {
 
             <Button onClick={submitHandler}>Add</Button>
           </Form>
+          </Collapse>
         </Col>
         <Col></Col>
       </Row>
+
     </div>
   );
 };

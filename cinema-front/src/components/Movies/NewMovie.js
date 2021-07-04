@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import AddMovieForm from "./AddMovieForm";
 
 const NewMovie = (props) => {
+  const [showAdd, setShowAdd] = useState(false);
+
+
   const saveMovieDataHandler = (enteredMovieData) => {
     const movieData = {
       ...enteredMovieData,

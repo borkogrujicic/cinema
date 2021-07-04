@@ -16,9 +16,8 @@ const Movies = () => {
         console.log(res);
 
         alert("Uspesno dodat film");
-        this.props.history.push("/projekcije");
+        window.location.reload()
       })
-
       .catch((error) => {
         console.log(error);
 
@@ -40,8 +39,9 @@ const Movies = () => {
 
   return (
     <div>
-      <MoviesList movies={filmovi} />
       <NewMovie onAddMovie={addMovieHandler}/>
+      <MoviesList movies={filmovi} />
+    
     </div>
   );
 };

@@ -31,6 +31,7 @@ const Projections = (props) => {
             <th>Sala</th>
             <th>Datum i vreme</th>
             <th>Cena karte</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -41,7 +42,7 @@ const Projections = (props) => {
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>
               <td>{projection.cena}</td>
-              <td><Button onClick={() => remove(projection.id)}>Delete</Button></td>
+              <td><Button variant="danger" onClick={() => remove(projection.id)}>Delete</Button></td>
             </tr>
           ))}
         </tbody>
