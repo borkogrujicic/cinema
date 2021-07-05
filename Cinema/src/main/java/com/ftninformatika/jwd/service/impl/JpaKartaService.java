@@ -1,5 +1,6 @@
 package com.ftninformatika.jwd.service.impl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -20,13 +21,14 @@ public class JpaKartaService implements KartaService{
 
 	@Override
 	public Karta save(Karta karta) {
+		karta.setDatum(LocalDate.now());
 		Projekcija projekcija = karta.getProjekcija();
 		if (projekcija.getDatumIVreme().isBefore(LocalDateTime.now())) {
 			return null;
 		}
-		List <Karta> karte = kartaRepository.findByProjekcijaId(karta.getProjekcija().getId());
-		for (int i = 0; i < karte.size(); i++) {
-			if (karte.get(i).getSediste() == karta.getSediste()) {
+		List <Karta> karteZaProjekciju = kartaRepository.findByProjekcijaId(karta.getProjekcija().getId());
+		for (int i = 0; i < karteZaProjekciju.size(); i++) {
+			if (karteZaProjekciju.get(i).getSediste() == karta.getSediste()) {
 				return null;
 			}
 		}
@@ -37,20 +39,17 @@ public class JpaKartaService implements KartaService{
 
 	@Override
 	public Karta findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return kartaRepository.findOneById(id);
 	}
 
 	@Override
 	public List<Karta> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return kartaRepository.findAll();
 	}
 
 	@Override
 	public List<Karta> findByProjekcijaId(Long projekcijaId) {
-		// TODO Auto-generated method stub
-		return null;
+		return kartaRepository.findByProjekcijaId(projekcijaId);
 	}
 
 }
