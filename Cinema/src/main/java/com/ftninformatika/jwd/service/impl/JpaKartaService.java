@@ -11,12 +11,16 @@ import com.ftninformatika.jwd.model.Karta;
 import com.ftninformatika.jwd.model.Projekcija;
 import com.ftninformatika.jwd.repository.KartaRepository;
 import com.ftninformatika.jwd.service.KartaService;
+import com.ftninformatika.jwd.service.ProjekcijaService;
 
 @Service
 public class JpaKartaService implements KartaService{
 	
 	@Autowired
 	private KartaRepository kartaRepository;
+	
+	@Autowired
+	private ProjekcijaService projekcijaService;
 	
 
 	@Override
@@ -32,9 +36,9 @@ public class JpaKartaService implements KartaService{
 				return null;
 			}
 		}
-		projekcija.dodajKartu(karta);
-		kartaRepository.save(karta);		
-		return karta;
+//		projekcija.dodajKartu(karta);
+//		projekcijaService.update(projekcija);	
+		return kartaRepository.save(karta);
 	}
 
 	@Override

@@ -52,7 +52,7 @@ public class KarteController {
         Karta karta = toKarta.convert(dto);
         Karta saved = kartaService.save(karta);
 
-        return new ResponseEntity<>(toDto.convert(saved), HttpStatus.CREATED);
+        return new ResponseEntity<>(toDto.convert(karta), HttpStatus.CREATED);
     }
 
 }

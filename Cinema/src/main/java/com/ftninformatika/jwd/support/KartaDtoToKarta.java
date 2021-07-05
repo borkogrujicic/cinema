@@ -32,22 +32,23 @@ public class KartaDtoToKarta implements Converter<KartaDTO, Karta>{
 		
 		if (dto.getId() != null) {
 			karta = kartaService.findOne(dto.getId());
-		} else {
+		} 
+		
+		if (karta == null) {
 			karta = new Karta();
 		}
 		
-		karta.setId(dto.getId());
-		karta.setDatum(getLocalDate (dto.getDatum()));
-		karta.setProjekcija(projekcijaService.findOne(dto.getProjekcija().getId()));
-		karta.setSediste(sedisteService.findOne(dto.getSediste().getRedniBroj()));
+		karta.setDatum(LocalDate.now());
+		karta.setProjekcija(projekcijaService.findOne(dto.getProjekcijaId()));
+		karta.setSediste(sedisteService.findOne(dto.getSedisteId()));
 	
 		return karta;
 	}
 	
-    private LocalDate getLocalDate(String datumS) throws DateTimeParseException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate datum = LocalDate.parse(datumS, formatter);
-        return datum;
-    }	
+//    private LocalDate getLocalDate(String datumS) throws DateTimeParseException {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate datum = LocalDate.parse(datumS, formatter);
+//        return datum;
+//    }	
 
 }

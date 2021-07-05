@@ -9,6 +9,7 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home";
 import Projections from "./components/Projections/Projections";
 import Movies from "./components/Movies/Movies";
+import Rezervacija from "./components/Projections/Rezervacija";
 
 
 const App = () => {
@@ -25,12 +26,11 @@ const App = () => {
                 <Nav.Link as={Link} to="/projekcije">
                   Projekcije
                 </Nav.Link>
-              </Nav>
-              <Nav className="mr-auto">
+              
                 <Nav.Link as={Link} to="/filmovi">
                   Filmovi
                 </Nav.Link>
-              </Nav>
+                </Nav>
 
               {window.localStorage['jwt'] ? 
                   <Button onClick = {()=>logout()}>Log out</Button> :
@@ -41,6 +41,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/projekcije" component={Projections} />
+            <Route exact path="/projekcije/rezervisi/:projekcijaId" component={Rezervacija} />
             <Route exact path="/filmovi" component={Movies} />
             <Route exact path="/login" component={Login} />
             <Route component={NotFound} />

@@ -3,8 +3,10 @@ package com.ftninformatika.jwd.web.dto;
 public class KartaDTO {
 	
 	private Long id;
-	private ProjekcijaDTO projekcija;
-	private SedisteDTO sediste;
+	private Long sedisteId;
+	private Long projekcijaId;
+	private String projekcijaDatum;
+	private String projekcijaFilm;
 	private String datum;
 	
 	public KartaDTO() {
@@ -19,22 +21,6 @@ public class KartaDTO {
 		this.id = id;
 	}
 
-	public ProjekcijaDTO getProjekcija() {
-		return projekcija;
-	}
-
-	public void setProjekcija(ProjekcijaDTO projekcija) {
-		this.projekcija = projekcija;
-	}
-
-	public SedisteDTO getSediste() {
-		return sediste;
-	}
-
-	public void setSediste(SedisteDTO sediste) {
-		this.sediste = sediste;
-	}
-
 	public String getDatum() {
 		return datum;
 	}
@@ -42,7 +28,40 @@ public class KartaDTO {
 	public void setDatum(String datum) {
 		this.datum = datum;
 	}
+
+	public Long getProjekcijaId() {
+		return projekcijaId;
+	}
+
+	public void setProjekcijaId(Long projekcijaId) {
+		this.projekcijaId = projekcijaId;
+	}
+
+	public String getProjekcijaDatum() {
+		return projekcijaDatum;
+	}
+
+	public void setProjekcijaDatum(String projekcijaDatum) {
+		this.projekcijaDatum = projekcijaDatum;
+	}
+
+	public String getProjekcijaFilm() {
+		return projekcijaFilm;
+	}
+
+	public void setProjekcijaFilm(String projekcijaFilm) {
+		this.projekcijaFilm = projekcijaFilm;
+	}
+
+	public Long getSedisteId() {
+		return sedisteId;
+	}
+
+	public void setSedisteId(Long sedisteId) {
+		this.sedisteId = sedisteId;
+	}
 	
 	
+
 
 }

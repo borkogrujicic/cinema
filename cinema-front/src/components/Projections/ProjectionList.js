@@ -19,6 +19,7 @@ const Projections = (props) => {
     });
   }
 
+
   return (
     <div>
       <h1>Projekcije</h1>
@@ -31,7 +32,7 @@ const Projections = (props) => {
             <th>Sala</th>
             <th>Datum i vreme</th>
             <th>Cena karte</th>
-            {window.localStorage["role"] == "ROLE_ADMIN"
+            {window.localStorage["role"] === "ROLE_ADMIN"
             ? [<th>Delete</th>] : null}
           </tr>
         </thead>
@@ -43,7 +44,7 @@ const Projections = (props) => {
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>
               <td>{projection.cena}</td>
-              {window.localStorage["role"] == "ROLE_ADMIN"
+              {window.localStorage["role"] === "ROLE_ADMIN"
               ? [<td><Button variant="danger" onClick={() => remove(projection.id)}>Delete</Button></td>] : null}
             </tr>
           ))}

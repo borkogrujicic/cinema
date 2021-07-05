@@ -39,7 +39,8 @@ const Movies = () => {
 
   return (
     <div>
-      <NewMovie onAddMovie={addMovieHandler}/>
+       {window.localStorage["role"] == "ROLE_ADMIN"
+      ? [<NewMovie onAddMovie={addMovieHandler}/>] : null }
       <MoviesList movies={filmovi} />
     
     </div>

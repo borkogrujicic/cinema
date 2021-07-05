@@ -2,19 +2,19 @@ package com.ftninformatika.jwd.web.dto;
 
 public class SedisteDTO {
 	
-	private int redniBroj;
+	private Long sedisteId;
 
 	
 	public SedisteDTO() {
 		super();
 	}
 
-	public int getRedniBroj() {
-		return redniBroj;
+	public Long getRedniBroj() {
+		return sedisteId;
 	}
 
-	public void setRedniBroj(int redniBroj) {
-		this.redniBroj = redniBroj;
+	public void setRedniBroj(Long redniBroj) {
+		this.sedisteId = redniBroj;
 	}
 
 

@@ -6,8 +6,10 @@ import com.ftninformatika.jwd.model.Sediste;
 
 public interface SedisteService {
 	
-	Sediste findOne (Integer id);
+	Sediste findOne (Long id);
 	
 	List <Sediste> findAll ();
+	
+	List <Sediste> findBySala (Long id);
 
 }

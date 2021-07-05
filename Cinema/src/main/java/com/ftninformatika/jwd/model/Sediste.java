@@ -1,6 +1,5 @@
 package com.ftninformatika.jwd.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,9 +13,6 @@ public class Sediste {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	
-	@Column(name="redni_broj")
-	private int redniBroj;
 	
 	@ManyToOne
 	private Sala sala;
@@ -40,15 +36,6 @@ public class Sediste {
 		this.id = id;
 	}
 
-
-
-	public int getRedniBroj() {
-		return redniBroj;
-	}
-
-	public void setRedniBroj(int redniBroj) {
-		this.redniBroj = redniBroj;
-	}
 
 	public Sala getSala() {
 		return sala;

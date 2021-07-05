@@ -16,13 +16,18 @@ public class JpaSedisteService implements SedisteService{
 	private SedisteRepository sedisteRepository;
 
 	@Override
-	public Sediste findOne(Integer id) {
+	public Sediste findOne(Long id) {
 		return sedisteRepository.findOneById(id);
 	}
 
 	@Override
 	public List<Sediste> findAll() {
 		return sedisteRepository.findAll();
+	}
+
+	@Override
+	public List<Sediste> findBySala(Long id) {
+		return sedisteRepository.findBySalaId(id);
 	}
 
 }

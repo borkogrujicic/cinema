@@ -18,7 +18,7 @@ public class SedisteToSedisteDto implements Converter <Sediste, SedisteDTO>{
 	@Override
 	public SedisteDTO convert(Sediste sediste) {
 		SedisteDTO dto = new SedisteDTO();
-		dto.setRedniBroj(sediste.getRedniBroj());
+		
 		return dto;
 	}
 	
