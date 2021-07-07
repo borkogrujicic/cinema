@@ -1,6 +1,8 @@
 package com.ftninformatika.jwd.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
@@ -84,7 +86,10 @@ public class FilmoviController {
     @GetMapping
     public ResponseEntity<List<FilmDTO>> getAll(){
 
-    	List<Film> filmovi = filmService.findAll();
+    	Iterable <Film> filmoviIt = filmService.findAllMovies();
+    	List<Film> filmovi = 
+    			  StreamSupport.stream(filmoviIt.spliterator(), false)
+    			    .collect(Collectors.toList());
 
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.add("Total-Pages", Integer.toString(page.getTotalPages()));

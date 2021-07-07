@@ -15,5 +15,7 @@ public interface FilmService {
 	Film delete (Long id);
 	
 	Film update (Film film);
+	
+	Iterable <Film> findAllMovies ();
 
 }

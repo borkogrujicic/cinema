@@ -19,8 +19,8 @@ public class JpaKartaService implements KartaService{
 	@Autowired
 	private KartaRepository kartaRepository;
 	
-	@Autowired
-	private ProjekcijaService projekcijaService;
+//	@Autowired
+//	private ProjekcijaService projekcijaService;
 	
 
 	@Override
@@ -36,8 +36,6 @@ public class JpaKartaService implements KartaService{
 				return null;
 			}
 		}
-//		projekcija.dodajKartu(karta);
-//		projekcijaService.update(projekcija);	
 		return kartaRepository.save(karta);
 	}
 

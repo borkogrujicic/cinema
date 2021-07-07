@@ -46,4 +46,9 @@ public class JpaFilmService implements FilmService{
 		return filmRepository.save(film);
 	}
 
+	@Override
+	public Iterable<Film> findAllMovies() {
+		return filmRepository.findAll();
+	}
+
 }

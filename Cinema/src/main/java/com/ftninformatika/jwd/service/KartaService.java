@@ -13,5 +13,7 @@ public interface KartaService {
 	List <Karta> findAll ();
 	
 	List <Karta> findByProjekcijaId (Long projekcijaId);
+	
+
 
 }

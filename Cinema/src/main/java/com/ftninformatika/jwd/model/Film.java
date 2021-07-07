@@ -12,7 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Entity
+@SQLDelete(sql = "UPDATE film SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Film {
 	
     @Id
@@ -48,7 +53,10 @@ public class Film {
     
     @OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Projekcija> projekcije = new ArrayList<>();
-
+    
+    @Column
+    private boolean deleted = Boolean.FALSE;
+    
 	public Film() {
 		super();
 	}
@@ -140,5 +148,15 @@ public class Film {
 	public void setProjekcije(List<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
+	
 
 }
