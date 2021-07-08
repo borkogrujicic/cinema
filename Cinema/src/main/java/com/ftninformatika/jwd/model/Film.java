@@ -157,6 +157,4 @@ public class Film {
 		this.deleted = deleted;
 	}
 	
-	
-
 }

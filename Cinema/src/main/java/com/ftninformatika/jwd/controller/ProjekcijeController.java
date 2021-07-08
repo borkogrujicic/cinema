@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftninformatika.jwd.model.Projekcija;
@@ -93,9 +96,10 @@ public class ProjekcijeController {
     }
     
     @GetMapping
-    public ResponseEntity<List<ProjekcijaDTO>> getAll(){
+    public ResponseEntity<List<ProjekcijaDTO>> getAll(
+    		@RequestParam (value = "pageNo", defaultValue = "0") int pageNo){
 
-        List<Projekcija> projekcije = projekcijaService.findAll();
+        Page <Projekcija> projekcije = projekcijaService.findAll(pageNo);
 
 //        if(datumIVremeOdParametar != null && datumIVremeDoParametar != null) {
 //        	
@@ -107,8 +111,11 @@ public class ProjekcijeController {
 //        else{
 //            projekcije = projekcijaService.findAll();
 //        }
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Total-Pages", Integer.toString(projekcije.getTotalPages()));
 
-        return new ResponseEntity<>(toDto.convert(projekcije), HttpStatus.OK);
+        return new ResponseEntity<>(toDto.convert(projekcije.getContent()), HttpStatus.OK);
     }
 
 //    private LocalDateTime getLocalDateTime(String datumIVreme) throws DateTimeParseException {

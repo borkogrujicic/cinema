@@ -21,8 +21,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name="UniqueDatumIVremeAndSala", columnNames = {"datum_vreme", "sala_id"}))
+@SQLDelete(sql = "UPDATE projekcija SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Projekcija {
 	
     @Id
@@ -51,7 +56,10 @@ public class Projekcija {
     @JoinTable(name = "projekcija_tip", joinColumns = @JoinColumn(name = "projekcija_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tip_id", referencedColumnName = "id"))
     private List <Tip> tipovi = new ArrayList<>();
-
+    
+    @Column
+    private boolean deleted = Boolean.FALSE;
+    
 	public Projekcija() {
 		super();
 	}
@@ -123,8 +131,13 @@ public class Projekcija {
 	public void dodajKartu (Karta karta) {
 		karte.add(karta);
 	}
-	
-	
-    
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+	
 }

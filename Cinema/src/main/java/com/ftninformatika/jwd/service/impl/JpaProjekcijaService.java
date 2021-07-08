@@ -3,6 +3,8 @@ package com.ftninformatika.jwd.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ftninformatika.jwd.model.Projekcija;
@@ -62,6 +64,11 @@ public class JpaProjekcijaService implements ProjekcijaService{
 	@Override
 	public List<Projekcija> findByFilmId(Long id) {
 		return projekcijaRepository.findByFilmId(id);
+	}
+
+	@Override
+	public Page<Projekcija> findAll(int pageNo) {
+		return projekcijaRepository.findAll(PageRequest.of(pageNo, 5));
 	}
 
 }

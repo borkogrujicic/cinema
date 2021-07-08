@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ftninformatika.jwd.model.Film;
@@ -49,6 +51,11 @@ public class JpaFilmService implements FilmService{
 	@Override
 	public Iterable<Film> findAllMovies() {
 		return filmRepository.findAll();
+	}
+
+	@Override
+	public Page<Film> findAll(int pageNo) {
+		return filmRepository.findAll(PageRequest.of(pageNo, 5));
 	}
 
 }

@@ -33,9 +33,9 @@ INSERT INTO sala_tip (`sala_id`, `tip_id`) VALUES (3, 3);
 INSERT INTO film (`id`, `distributer`, `glumci`, `godina_proizvodnje`, `naziv`, `opis`, `reziser`, `trajanje`, `zanrovi`, `zemlja_porekla`, deleted) VALUES (1, 'Universal', 'Brad Pitt, Leonardo Di Caprio', '2019', 'Once Upon a Time in Hollywood', 'Film', 'Quentin Tarantino', 120, 'Drama', 'USA', 0);
 INSERT INTO film (`id`, `distributer`, `glumci`, `godina_proizvodnje`, `naziv`, `opis`, `reziser`, `trajanje`, `zanrovi`, `zemlja_porekla`, deleted) VALUES (2, 'Walt Disney', '/', '2021', 'Zlica', 'Film', 'Craig Gillespie', 120, 'Deciji', 'USA', 0);
 
-INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (1, '250', '2022-06-21 20:00', 1, 1, 1);
-INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (2, '350', '2022-06-21 22:00', 2, 1, 2);
-INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`) VALUES (3, '350', '2022-06-22 22:00', 2, 2, 2);
+INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`, deleted) VALUES (1, '250', '2022-06-21 20:00', 1, 1, 1, 0);
+INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`, deleted) VALUES (2, '350', '2022-06-21 22:00', 2, 1, 2, 0);
+INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`, deleted) VALUES (3, '350', '2022-06-22 22:00', 2, 2, 2, 0);
 
 INSERT INTO karta (`id`, `datum`, `projekcija_id`, `sediste_id`) VALUES (1, '2020-06-20 20:00', 1, 1);
 

@@ -2,6 +2,8 @@ package com.ftninformatika.jwd.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.ftninformatika.jwd.model.Film;
 
 public interface FilmService {
@@ -17,5 +19,7 @@ public interface FilmService {
 	Film update (Film film);
 	
 	Iterable <Film> findAllMovies ();
+	
+	Page <Film> findAll (int pageNo);
 
 }

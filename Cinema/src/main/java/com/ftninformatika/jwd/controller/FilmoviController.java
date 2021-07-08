@@ -1,12 +1,12 @@
 package com.ftninformatika.jwd.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftninformatika.jwd.model.Film;
@@ -84,18 +85,15 @@ public class FilmoviController {
     }
     
     @GetMapping
-    public ResponseEntity<List<FilmDTO>> getAll(){
+    public ResponseEntity<List<FilmDTO>> getAll(
+    		@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
+    	
+    	Page <Film> filmovi = filmService.findAll(pageNo);
+    	
 
-    	Iterable <Film> filmoviIt = filmService.findAllMovies();
-    	List<Film> filmovi = 
-    			  StreamSupport.stream(filmoviIt.spliterator(), false)
-    			    .collect(Collectors.toList());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Total-Pages", Integer.toString(filmovi.getTotalPages()));
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Total-Pages", Integer.toString(page.getTotalPages()));
-
-        return new ResponseEntity<>(toDto.convert(filmovi), HttpStatus.OK);
+        return new ResponseEntity<>(toDto.convert(filmovi.getContent()), HttpStatus.OK);
     }
-
-
 }
