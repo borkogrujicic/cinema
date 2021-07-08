@@ -12,12 +12,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.SQLDelete;
-import org.hibernate.annotations.Where;
 
 @Entity
 @SQLDelete(sql = "UPDATE film SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+@FilterDef(name = "deletedFilmFilter", parameters = @ParamDef (name="isDeleted", type = "boolean"))
+@Filter(name = "deletedFilmFilter", condition = "deleted = :isDeleted")
 public class Film {
 	
     @Id

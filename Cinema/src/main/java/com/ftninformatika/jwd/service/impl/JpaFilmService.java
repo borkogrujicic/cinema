@@ -3,6 +3,10 @@ package com.ftninformatika.jwd.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+
+import org.hibernate.Filter;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +21,9 @@ public class JpaFilmService implements FilmService{
 	
 	@Autowired
 	private FilmRepository filmRepository;
+	
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public Film findOne(Long id) {
@@ -54,8 +61,18 @@ public class JpaFilmService implements FilmService{
 	}
 
 	@Override
-	public Page<Film> findAll(int pageNo) {
-		return filmRepository.findAll(PageRequest.of(pageNo, 5));
+	public Page<Film> findAll(boolean isDeleted, int pageNo) {
+		Session session = entityManager.unwrap(Session.class);
+		Filter filter = session.enableFilter("deletedFilmFilter");
+		filter.setParameter("isDeleted", isDeleted);
+		Page <Film> filmovi = filmRepository.findAll(PageRequest.of(pageNo, 5));
+		session.disableFilter("deletedFilmFilter");
+		return filmovi;
+	}
+
+	@Override
+	public void remove(Long id) {
+		filmRepository.deleteById(id);	
 	}
 
 }

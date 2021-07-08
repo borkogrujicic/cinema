@@ -66,6 +66,7 @@ public class FilmoviController {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         Film obrisanFilm = filmService.delete(id);
 
+
         if(obrisanFilm != null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
@@ -88,7 +89,7 @@ public class FilmoviController {
     public ResponseEntity<List<FilmDTO>> getAll(
     		@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
     	
-    	Page <Film> filmovi = filmService.findAll(pageNo);
+    	Page <Film> filmovi = filmService.findAll(false, pageNo);
     	
 
         HttpHeaders headers = new HttpHeaders();

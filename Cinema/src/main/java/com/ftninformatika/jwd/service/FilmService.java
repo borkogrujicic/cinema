@@ -20,6 +20,9 @@ public interface FilmService {
 	
 	Iterable <Film> findAllMovies ();
 	
-	Page <Film> findAll (int pageNo);
+	Page <Film> findAll (boolean isDeleted, int pageNo);
+	
+	
+	void remove (Long id);
 
 }
