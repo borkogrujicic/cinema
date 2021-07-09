@@ -1,24 +1,29 @@
+import { useHistory } from "react-router-dom";
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
 
 const Projections = (props) => {
+  let history = useHistory();
 
-  const remove = id => {
+  const goToReservation = (id) => {
+    history.push("/projekcije/rezervisi/" + id);
+  };
+
+  const remove = (id) => {
     FrontAxios.delete("/projekcije/" + id)
-    .then((res) => {
-      // handle success
-      console.log(res);
-      alert("Projection was deleted successfully!");
-      window.location.reload();
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-      alert("Error occured please try again!");
-    });
-  }
-
+      .then((res) => {
+        // handle success
+        console.log(res);
+        alert("Projection was deleted successfully!");
+        window.location.reload();
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+        alert("Error occured please try again!");
+      });
+  };
 
   return (
     <div>
@@ -32,8 +37,12 @@ const Projections = (props) => {
             <th>Sala</th>
             <th>Datum i vreme</th>
             <th>Cena karte</th>
+            {window.localStorage["role"] === "ROLE_KORISNIK"
+              ? [<th>Rezervisi</th>]
+              : null}
             {window.localStorage["role"] === "ROLE_ADMIN"
-            ? [<th>Delete</th>] : null}
+              ? [<th>Delete</th>]
+              : null}
           </tr>
         </thead>
         <tbody>
@@ -44,8 +53,30 @@ const Projections = (props) => {
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>
               <td>{projection.cena}</td>
+              {window.localStorage["role"] === "ROLE_KORISNIK"
+                ? [
+                    <td>
+                      <Button
+                        variant="success"
+                        onClick={() => goToReservation(projection.id)}
+                      >
+                        Rezervisi
+                      </Button>
+                    </td>,
+                  ]
+                : null}
               {window.localStorage["role"] === "ROLE_ADMIN"
-              ? [<td><Button variant="danger" onClick={() => remove(projection.id)}>Delete</Button></td>] : null}
+                ? [
+                    <td>
+                      <Button
+                        variant="danger"
+                        onClick={() => remove(projection.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>,
+                  ]
+                : null}
             </tr>
           ))}
         </tbody>
