@@ -34,6 +34,7 @@ public class FilmDtoToFilm implements Converter <FilmDTO, Film>{
 		film.setReziser(dto.getReziser());
 		film.setTrajanje(dto.getTrajanje());
 		film.setZemljaPorekla(dto.getZemljaPorekla());
+		film.setZanrovi(dto.getZanrovi());
 		
 			
 		return film;

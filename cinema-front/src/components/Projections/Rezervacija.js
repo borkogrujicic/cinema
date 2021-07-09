@@ -23,7 +23,7 @@ class Reservation extends React.Component {
 
   componentDidMount() {
     this.getProjection(1);
-    this.getSedista(1)
+    this.getSedista(1);
   }
 
   getProjection(id) {
@@ -32,7 +32,7 @@ class Reservation extends React.Component {
         // handle success
         console.log(res);
         this.setState({
-          projekcija: res.data
+          projekcija: res.data,
         });
       })
       .catch((error) => {
@@ -42,20 +42,20 @@ class Reservation extends React.Component {
       });
   }
 
-  getSedista (salaId) {
+  getSedista(salaId) {
     FrontAxios.get("/sale/" + salaId)
-    .then((res) => {
-      // handle success
-      console.log(res);
-      this.setState({
-        sedista: res.data
+      .then((res) => {
+        // handle success
+        console.log(res);
+        this.setState({
+          sedista: res.data,
+        });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+        alert("Error occured please try again!");
       });
-    })
-    .catch((error) => {
-      // handle error
-      console.log(error);
-      alert("Error occured please try again!");
-    });
   }
 
   async getSedista(salaId) {
@@ -114,10 +114,17 @@ class Reservation extends React.Component {
         <Row>
           <Col></Col>
           <Col xs="12" sm="10" md="8">
-            <h1>
+            <h3>
+              Izvrsi rezervaciju za
+              <small class="text-muted">
+                {this.state.projekcija.film.naziv} za datum{" "}
+                {this.state.projekcija.datumIVreme}
+              </small>
+            </h3>
+            {/* <h1>
               Izvrsi rezervaciju za {this.state.projekcija.film.naziv} za datum{this.state.projekcija.datumIVreme}
               {this.state.projekcijaDatum}
-            </h1>
+            </h1> */}
             <Form>
               <Form.Group>
                 <Form.Label htmlFor="pSediste">Sediste</Form.Label>
