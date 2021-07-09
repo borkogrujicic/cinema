@@ -9,7 +9,7 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home";
 import Projections from "./components/Projections/Projections";
 import Movies from "./components/Movies/Movies";
-import Rezervacija from "./components/Projections/Reservation";
+import Rezervacija from "./components/Projections/Rezervacija";
 
 
 const App = () => {

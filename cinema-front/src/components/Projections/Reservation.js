@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import FrontAxios from "../../apis/FrontAxios";
 import { Form, Row, Col, Button } from "react-bootstrap";
 
-const Rezervacija = (props) => {
+const Rezervacija = props => {
   const [projekcijaId, setProjekcijaId] = useState("");
   const [projekcijaDatum, setProjekcijaDatum] = useState("");
   const [projekcijaFilm, setProjekcijaFilm] = useState("");
+  const [sala, setSala] = useState ({})
   const [sedisteId, setSedisteId] = useState("");
   const [sedista, setSedista] = [{}];
 
   useEffect(() => {
-    getProjection(props.id);
+    getProjection();
   }, []);
 
   const getProjection = (projekcijaId) => {
@@ -20,6 +21,7 @@ const Rezervacija = (props) => {
         setProjekcijaId(res.data.id);
         setProjekcijaDatum(res.data.datumIVreme);
         setProjekcijaFilm(res.data.film.naziv);
+        setSala(res.data.sala)
       })
       .catch((err) => {
         console.log(err);

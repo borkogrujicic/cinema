@@ -25,4 +25,5 @@ public class JpaSalaService implements SalaService{
 		return salaRepository.findAll();
 	}
 
+
 }

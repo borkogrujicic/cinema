@@ -1,90 +1,93 @@
-import React, { useState, useEffect } from "react";
-import FrontAxios from "../../apis/FrontAxios";
+import React from "react";
 import { Form, Row, Col, Button } from "react-bootstrap";
+import FrontAxios from "./../../apis/FrontAxios";
 
-const Rezervacija = (props) => {
-  const [projekcijaId, setProjekcijaId] = useState("");
-  const [projekcijaDatum, setProjekcijaDatum] = useState("");
-  const [projekcijaFilm, setProjekcijaFilm] = useState("");
-  const [sedisteId, setSedisteId] = useState("");
-  const [sedista, setSedista] = [{}]
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
 
-//   useEffect(() => {
-//     getProjection(),
-//       getSedista(props.projekcija.sala.id);
-//   }, []);
+    let projekcija = {
+      id: 0,
+      film: {},
+      tip: {},
+      sala: {},
+      datumIVreme: "",
+      cena: 0,
+    };
 
-  
-  const fetchData = (projekcijaId, salaId) => {
-    FrontAxios.get("/projekcije/" + projekcijaId)
-    .then((res) => {
-      console.log(res);
-      setProjekcijaId(res.data.id);
-      setProjekcijaDatum(res.data.datumIVreme)
-      setProjekcijaFilm(res.data.film.naziv)
-    })
-    .catch((err) => {
-      console.log(err);
-      alert("Couldn't fetch projection");
-    });
-
-        FrontAxios.get("/sale/" + salaId)
-          .then((res) => {
-            console.log(res);
-            setSedista(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-            alert("Couldn't fetch seats");
-          });
-    
-}
-
-
-  function getProjection(projekcijaId) {
-    FrontAxios.get("/projekcije/" + projekcijaId)
-      .then((res) => {
-        console.log(res);
-        setProjekcijaId(res.data.id);
-        setProjekcijaDatum(res.data.datumIVreme)
-        setProjekcijaFilm(res.data.film.naziv)
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Couldn't fetch projection");
-      });
+    this.state = {
+      projekcija: projekcija,
+      sedista: [],
+    };
   }
 
-  function getSedista(salaId) {
-    FrontAxios.get("/sale/" + salaId)
-      .then((res) => {
-        console.log(res);
-        setSedista(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-        alert("Couldn't fetch seats");
-      });
+  componentDidMount() {
+    this.getProjection(1);
+    this.getSedista(1)
   }
 
-  function rezervisi () {
-    var params = {
-        projekcijaId: projekcijaId,
-        sedisteId: sedisteId,
-      };
-  
-      FrontAxios.post("/karte/", params)
-        .then((res) => {
-          // handle success
-          console.log(res);
-          alert("Reservation was made successfully!");
-          this.props.history.push("/projekcije");
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-          alert("Error occured please try again!");
+  getProjection(id) {
+    FrontAxios.get("/projekcije/" + id)
+      .then((res) => {
+        // handle success
+        console.log(res);
+        this.setState({
+          projekcija: res.data
         });
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+        alert("Error occured please try again!");
+      });
+  }
+
+  getSedista (salaId) {
+    FrontAxios.get("/sale/" + salaId)
+    .then((res) => {
+      // handle success
+      console.log(res);
+      this.setState({
+        sedista: res.data
+      });
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+      alert("Error occured please try again!");
+    });
+  }
+
+  async getSedista(salaId) {
+    try {
+      let result = await FrontAxios.get("/sale/" + salaId);
+      let sedista = result.data;
+      this.setState({ sedista: sedista });
+      console.log("test1");
+    } catch (error) {
+      console.log(error);
+      alert("Couldn't fetch seats");
+    }
+  }
+
+  rezervacija() {
+    var params = {
+      projekcijaId: this.state.projekcijaId,
+      sedisteId: this.state.sedisteId,
+    };
+
+    FrontAxios.post("/karte/", params)
+      .then((res) => {
+        // handle success
+        console.log(res);
+        alert("Reservation was made successfully!");
+        this.props.history.push("/projekcije");
+      })
+      .catch((error) => {
+        // handle error
+        console.log(error);
+        alert("Error occured please try again!");
+      });
   }
 
   sedisteId = (event) => {
@@ -93,55 +96,63 @@ const Rezervacija = (props) => {
     const { name, value } = event.target;
     console.log(name + ", " + value);
 
-    setSedisteId(value);
+    this.setState((state, props) => ({
+      sedisteId: value,
+    }));
   };
 
-  
-  return (
-    <div>
-      <Row>
-        <Col></Col>
-        <Col xs="12" sm="10" md="8">
-          <h1>Izvrsi rezervaciju za {projekcijaFilm} za datum {projekcijaDatum} </h1>
+  klubSelectionChanged(e) {
+    // console.log(e);
 
-          <Form>
+    let klubId = e.target.value;
+    this.setState((klubId = klubId));
+  }
 
-            <Form.Group>
-              <Form.Label htmlFor="pSediste">Sediste</Form.Label>
-              <Form.Control
-                name="sediste"
-                as="select"
-                id="pSediste"
-                onChange={(event) => this.sedisteId(event)}
+  render() {
+    return (
+      <>
+        <Row>
+          <Col></Col>
+          <Col xs="12" sm="10" md="8">
+            <h1>
+              Izvrsi rezervaciju za {this.state.projekcija.film.naziv} za datum{this.state.projekcija.datumIVreme}
+              {this.state.projekcijaDatum}
+            </h1>
+            <Form>
+              <Form.Group>
+                <Form.Label htmlFor="pSediste">Sediste</Form.Label>
+                <Form.Control
+                  name="sediste"
+                  as="select"
+                  id="pSediste"
+                  onChange={(event) => this.sedisteId(event)}
+                >
+                  <option></option>
+                  {this.state.sedista.map((sediste) => {
+                    return (
+                      <option key={sediste.sedisteId} value={sediste.sedisteId}>
+                        {sediste.sedisteId}
+                      </option>
+                    );
+                  })}
+                </Form.Control>
+                <br />
+              </Form.Group>
+
+              <Button
+                onClick={(event) => {
+                  this.transfer(event);
+                }}
               >
-                <option></option>
-                {sedista.map((sediste) => {
-                  return (
-                    <option key={sediste.redniBroj} value={sediste.redniBroj}>
-                      {sediste.redniBroj}
-                    </option>
-                  );
-                })}
-              </Form.Control>
-              <br />
-            </Form.Group>
-
-            <Button
-              onClick={(event) => {
-                this.rezervisi(event);
-              }}
-            >
-              Rezervisi
-            </Button>
-          </Form>
-        </Col>
-        <Col></Col>
-      </Row>
-    </div>
-  ); 
+                Add
+              </Button>
+            </Form>
+          </Col>
+          <Col></Col>
+        </Row>
+      </>
+    );
+  }
 }
 
-    
-
-
-export default Rezervacija;
+export default Reservation;

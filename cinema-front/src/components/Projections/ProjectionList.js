@@ -10,6 +10,10 @@ const Projections = (props) => {
     history.push("/projekcije/rezervisi/" + id);
   };
 
+
+
+
+
   const remove = (id) => {
     FrontAxios.delete("/projekcije/" + id)
       .then((res) => {

@@ -33,7 +33,7 @@ public class SalaController {
 	@Autowired
 	private SedisteToSedisteDto toSedisteDto;
 	
-    @GetMapping("/{id}/sedista")
+    @GetMapping("/{id}")
     public ResponseEntity<List<SedisteDTO>> findBySalaId(@PathVariable @Positive(message = "Id must be positive.")  Long id){
         List<Sediste> projekcije = sedisteService.findBySala(id);
 
