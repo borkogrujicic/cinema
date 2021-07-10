@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {Form} from 'react-bootstrap'
+import { Form, Button } from "react-bootstrap";
 import MoviesList from "./MoviesList";
 import FrontAxios from "../../apis/FrontAxios";
 import NewMovie from "./NewMovie";
 
 const Movies = () => {
   const [filmovi, setFilmovi] = useState([]);
-  const [nazivSearch, setNazivSearch] = useState ("");
-  const [zanroviSearch, setZanroviSearch] = useState("");
+  const [naziv, setNazivSearch] = useState("");
+  const [zanrovi, setZanroviSearch] = useState("");
 
   useEffect(() => {
     getMovies();
@@ -15,12 +15,12 @@ const Movies = () => {
 
   const searchNazivValueInputChange = (event) => {
     setNazivSearch(event.target.value);
-    getMovies()
+    getMovies();
   };
 
   const searchZanroviValueInputChange = (event) => {
     setZanroviSearch(event.target.value);
-    getMovies()
+    getMovies();
   };
 
   const addMovieHandler = (movie) => {
@@ -40,14 +40,11 @@ const Movies = () => {
 
   function getMovies() {
     let config = {
-      params: {},
+      params: {
+        naziv: naziv,
+        zanrovi: zanrovi
+      },
     };
-    if (nazivSearch !== '') {
-      config.params.naziv = nazivSearch;
-    }
-    if (zanroviSearch !== '') {
-      config.params.zanrovi = zanroviSearch
-    }
     FrontAxios.get("/filmovi", config)
       .then((res) => {
         console.log(res);
@@ -70,7 +67,7 @@ const Movies = () => {
           <Form.Control
             onChange={(event) => searchNazivValueInputChange(event)}
             name="naziv"
-            value={nazivSearch}
+            value={naziv}
             as="input"
           ></Form.Control>
         </Form.Group>
@@ -79,11 +76,12 @@ const Movies = () => {
           <Form.Control
             onChange={(event) => searchZanroviValueInputChange(event)}
             name="zanrovi"
-            value={zanroviSearch}
+            value={zanrovi}
             as="input"
           ></Form.Control>
         </Form.Group>
         <br></br>
+        <Button onClick={getMovies}>Search</Button>
       </Form>
       <MoviesList movies={filmovi} />
     </div>

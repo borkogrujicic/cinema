@@ -80,9 +80,18 @@ public class JpaFilmService implements FilmService{
 		Session session = entityManager.unwrap(Session.class);
 		Filter filter = session.enableFilter("deletedFilmFilter");
 		filter.setParameter("isDeleted", isDeleted);
-		Page <Film> filmovi = filmRepository.search(naziv, zanrovi, PageRequest.of(pageNo, 5));
+		
+		if (naziv == null) {
+			naziv ="";
+		}
+		if (zanrovi == null) {
+			zanrovi = "";
+		}
+		
+		Page <Film> filmovi = filmRepository.findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContains(naziv, zanrovi, PageRequest.of(pageNo, 5));
 		session.disableFilter("deletedFilmFilter");
 		return filmovi;
 	}
+
 
 }
