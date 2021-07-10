@@ -22,6 +22,8 @@ public interface FilmService {
 	
 	Page <Film> findAll (boolean isDeleted, int pageNo);
 	
+	Page <Film> search (String naziv, String zanrovi, boolean isDeleted, int pageNo);
+	
 	
 	void remove (Long id);
 

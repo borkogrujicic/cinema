@@ -87,9 +87,11 @@ public class FilmoviController {
     
     @GetMapping
     public ResponseEntity<List<FilmDTO>> getAll(
+    		@RequestParam(value = "naziv", required = false) String naziv,
+      		@RequestParam(value = "zanrovi", required = false) String zanrovi,
     		@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
     	
-    	Page <Film> filmovi = filmService.findAll(false, pageNo);
+    	Page <Film> filmovi = filmService.search(naziv, zanrovi, false, pageNo);
     	
 
         HttpHeaders headers = new HttpHeaders();

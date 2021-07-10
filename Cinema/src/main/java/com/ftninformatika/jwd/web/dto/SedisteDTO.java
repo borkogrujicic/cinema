@@ -3,6 +3,7 @@ package com.ftninformatika.jwd.web.dto;
 public class SedisteDTO {
 	
 	private Long sedisteId;
+	
 
 	
 	public SedisteDTO() {

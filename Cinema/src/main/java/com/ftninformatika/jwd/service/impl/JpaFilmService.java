@@ -75,4 +75,14 @@ public class JpaFilmService implements FilmService{
 		filmRepository.deleteById(id);	
 	}
 
+	@Override
+	public Page<Film> search(String naziv, String zanrovi, boolean isDeleted, int pageNo) {
+		Session session = entityManager.unwrap(Session.class);
+		Filter filter = session.enableFilter("deletedFilmFilter");
+		filter.setParameter("isDeleted", isDeleted);
+		Page <Film> filmovi = filmRepository.search(naziv, zanrovi, PageRequest.of(pageNo, 5));
+		session.disableFilter("deletedFilmFilter");
+		return filmovi;
+	}
+
 }
