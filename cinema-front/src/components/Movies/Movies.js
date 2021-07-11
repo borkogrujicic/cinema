@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Collapse } from "react-bootstrap";
 import MoviesList from "./MoviesList";
 import FrontAxios from "../../apis/FrontAxios";
 import NewMovie from "./NewMovie";
@@ -8,6 +8,7 @@ const Movies = () => {
   const [filmovi, setFilmovi] = useState([]);
   const [naziv, setNazivSearch] = useState("");
   const [zanrovi, setZanroviSearch] = useState("");
+  const [showSearchForm, setSearchForm] = useState(false);
 
   useEffect(() => {
     getMovies();
@@ -42,7 +43,7 @@ const Movies = () => {
     let config = {
       params: {
         naziv: naziv,
-        zanrovi: zanrovi
+        zanrovi: zanrovi,
       },
     };
     FrontAxios.get("/filmovi", config)
@@ -61,28 +62,39 @@ const Movies = () => {
       {window.localStorage["role"] == "ROLE_ADMIN"
         ? [<NewMovie onAddMovie={addMovieHandler} />]
         : null}
-      <Form style={{ marginTop: 10 }}>
-        <Form.Group>
-          <Form.Label>Naziv filma</Form.Label>
-          <Form.Control
-            onChange={(event) => searchNazivValueInputChange(event)}
-            name="naziv"
-            value={naziv}
-            as="input"
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Zanrovi</Form.Label>
-          <Form.Control
-            onChange={(event) => searchZanroviValueInputChange(event)}
-            name="zanrovi"
-            value={zanrovi}
-            as="input"
-          ></Form.Control>
-        </Form.Group>
-        <br></br>
-        <Button onClick={getMovies}>Search</Button>
-      </Form>
+      <Form.Group style={{ marginTop: 35 }}>
+        <Form.Check
+          type="checkbox"
+          label="Show search form"
+          onClick={(event) =>
+            setSearchForm(event.target.checked)
+          }
+        />
+      </Form.Group>
+      <Collapse in={showSearchForm}>
+        <Form style={{ marginTop: 10 }}>
+          <Form.Group>
+            <Form.Label>Naziv filma</Form.Label>
+            <Form.Control
+              onChange={(event) => searchNazivValueInputChange(event)}
+              name="naziv"
+              value={naziv}
+              as="input"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Zanrovi</Form.Label>
+            <Form.Control
+              onChange={(event) => searchZanroviValueInputChange(event)}
+              name="zanrovi"
+              value={zanrovi}
+              as="input"
+            ></Form.Control>
+          </Form.Group>
+          <br></br>
+          <Button onClick={getMovies}>Search</Button>
+        </Form>
+      </Collapse>
       <MoviesList movies={filmovi} />
     </div>
   );
