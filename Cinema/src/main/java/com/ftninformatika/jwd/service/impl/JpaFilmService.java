@@ -76,19 +76,24 @@ public class JpaFilmService implements FilmService{
 	}
 
 	@Override
-	public Page<Film> search(String naziv, String zanrovi, boolean isDeleted, int pageNo) {
+	public Page<Film> search(String naziv, String zanrovi, Integer trajanjeOd, Integer trajanjeDo, boolean isDeleted, int pageNo) {
 		Session session = entityManager.unwrap(Session.class);
 		Filter filter = session.enableFilter("deletedFilmFilter");
 		filter.setParameter("isDeleted", isDeleted);
-		
 		if (naziv == null) {
 			naziv ="";
 		}
 		if (zanrovi == null) {
 			zanrovi = "";
 		}
+		if (trajanjeOd == null) {
+			trajanjeOd = 0;
+		}
+		if (trajanjeDo == null) {
+			trajanjeDo = Integer.MAX_VALUE;
+		}
 		
-		Page <Film> filmovi = filmRepository.findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContains(naziv, zanrovi, PageRequest.of(pageNo, 5));
+		Page <Film> filmovi = filmRepository.findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetween(naziv, zanrovi, trajanjeOd, trajanjeDo, PageRequest.of(pageNo, 5));
 		session.disableFilter("deletedFilmFilter");
 		return filmovi;
 	}

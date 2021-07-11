@@ -89,9 +89,11 @@ public class FilmoviController {
     public ResponseEntity<List<FilmDTO>> getAll(
     		@RequestParam(value = "naziv", required = false) String naziv,
       		@RequestParam(value = "zanrovi", required = false) String zanrovi,
+      		@RequestParam(value = "trajanjeOd", required = false) Integer trajanjeOd,
+      		@RequestParam(value = "trajanjeDo", required = false) Integer trajanjeDo,
     		@RequestParam(value = "pageNo", defaultValue = "0") int pageNo){
     	
-    	Page <Film> filmovi = filmService.search(naziv, zanrovi, false, pageNo);
+    	Page <Film> filmovi = filmService.search(naziv, zanrovi, trajanjeOd, trajanjeDo, false, pageNo);
     	
 
         HttpHeaders headers = new HttpHeaders();

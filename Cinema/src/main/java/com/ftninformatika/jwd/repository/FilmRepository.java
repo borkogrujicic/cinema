@@ -19,6 +19,6 @@ public interface FilmRepository extends JpaRepository <Film, Long>{
 //			"(:zanrovi = NULL OR f.zanrovi LIKE :zanrovi)")
 //	Page<Film> search(@Param("naziv") String naziv, @Param("zanrovi") String zanrovi, Pageable pageable);
 	
-	Page<Film> findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContains(String naziv, String zanrovi, Pageable pageable);
+	Page<Film> findByNazivIgnoreCaseContainsAndZanroviIgnoreCaseContainsAndTrajanjeBetween(String naziv, String zanrovi, int trajanjeOd, int trajanjeDo, Pageable pageable);
 
 }

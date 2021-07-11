@@ -9,6 +9,8 @@ const Movies = () => {
   const [naziv, setNazivSearch] = useState("");
   const [zanrovi, setZanroviSearch] = useState("");
   const [showSearchForm, setSearchForm] = useState(false);
+  const [trajanjeOd, setTrajanjeOd] = useState();
+  const [trajanjeDo, setTrajanjeDo] = useState();
 
   useEffect(() => {
     getMovies();
@@ -21,6 +23,16 @@ const Movies = () => {
 
   const searchZanroviValueInputChange = (event) => {
     setZanroviSearch(event.target.value);
+    getMovies();
+  };
+
+  const minDurationChange = (event) => {
+    setTrajanjeOd(event.target.value);
+    getMovies();
+  };
+
+  const maxDurationChange = (event) => {
+    setTrajanjeDo(event.target.value);
     getMovies();
   };
 
@@ -44,6 +56,8 @@ const Movies = () => {
       params: {
         naziv: naziv,
         zanrovi: zanrovi,
+        trajanjeOd: trajanjeOd,
+        trajanjeDo: trajanjeDo
       },
     };
     FrontAxios.get("/filmovi", config)
@@ -66,9 +80,7 @@ const Movies = () => {
         <Form.Check
           type="checkbox"
           label="Show search form"
-          onClick={(event) =>
-            setSearchForm(event.target.checked)
-          }
+          onClick={(event) => setSearchForm(event.target.checked)}
         />
       </Form.Group>
       <Collapse in={showSearchForm}>
@@ -89,6 +101,26 @@ const Movies = () => {
               name="zanrovi"
               value={zanrovi}
               as="input"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Trajanje od:</Form.Label>
+            <Form.Control
+              value={trajanjeOd}
+              name="trajanjeOd"
+              as="input"
+              type="number"
+              onChange={(e) => minDurationChange(e)}
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Trajanje do:</Form.Label>
+            <Form.Control
+              value={trajanjeDo}
+              name="trajanjeDo"
+              as="input"
+              type="number"
+              onChange={(e) => maxDurationChange(e)}
             ></Form.Control>
           </Form.Group>
           <br></br>
