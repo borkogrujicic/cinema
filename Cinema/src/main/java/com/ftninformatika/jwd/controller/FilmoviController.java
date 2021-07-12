@@ -99,6 +99,6 @@ public class FilmoviController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Total-Pages", Integer.toString(filmovi.getTotalPages()));
 
-        return new ResponseEntity<>(toDto.convert(filmovi.getContent()), HttpStatus.OK);
+        return new ResponseEntity<>(toDto.convert(filmovi.getContent()), headers,  HttpStatus.OK);
     }
 }

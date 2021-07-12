@@ -12,10 +12,10 @@ const Movies = () => {
   const [trajanjeOd, setTrajanjeOd] = useState();
   const [trajanjeDo, setTrajanjeDo] = useState();
   const [pageNo, setPageNo] = useState("");
-  const [totalPages, setTotalPages] = useState ("");
+  const [totalPages, setTotalPages] = useState("");
 
   useEffect(() => {
-    getMovies();
+    getMovies(0);
   }, []);
 
   const searchNazivValueInputChange = (event) => {
@@ -56,11 +56,11 @@ const Movies = () => {
   function getMovies(pageNo) {
     let config = {
       params: {
-        pageNo: pageNo, 
+        pageNo: pageNo,
         naziv: naziv,
         zanrovi: zanrovi,
         trajanjeOd: trajanjeOd,
-        trajanjeDo: trajanjeDo
+        trajanjeDo: trajanjeDo,
       },
     };
     FrontAxios.get("/filmovi", config)
@@ -79,7 +79,7 @@ const Movies = () => {
   const changePage = (direction) => {
     const page = pageNo + direction;
     getMovies(page);
-}
+  };
 
   return (
     <div>
@@ -134,12 +134,16 @@ const Movies = () => {
             ></Form.Control>
           </Form.Group>
           <br></br>
-          <Button  onClick={getMovies}>Search</Button>
+          <Button onClick={getMovies}>Search</Button>
         </Form>
       </Collapse>
       <MoviesList movies={filmovi} />
-      <Button disabled={pageNo==0} onClick={()=>changePage(-1)}>Previous</Button>
-      <Button disabled={totalPages==pageNo+1}onClick={()=>changePage(1)}>Next</Button>
+      <Button disabled={pageNo == 0} onClick={() => changePage(-1)}>
+        Previous
+      </Button>
+      <Button disabled={totalPages == pageNo + 1} onClick={() => changePage(1)}>
+        Next
+      </Button>
     </div>
   );
 };
