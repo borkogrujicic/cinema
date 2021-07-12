@@ -11,6 +11,8 @@ const Movies = () => {
   const [showSearchForm, setSearchForm] = useState(false);
   const [trajanjeOd, setTrajanjeOd] = useState();
   const [trajanjeDo, setTrajanjeDo] = useState();
+  const [pageNo, setPageNo] = useState("");
+  const [totalPages, setTotalPages] = useState ("");
 
   useEffect(() => {
     getMovies();
@@ -51,9 +53,10 @@ const Movies = () => {
       });
   };
 
-  function getMovies() {
+  function getMovies(pageNo) {
     let config = {
       params: {
+        pageNo: pageNo, 
         naziv: naziv,
         zanrovi: zanrovi,
         trajanjeOd: trajanjeOd,
@@ -64,12 +67,19 @@ const Movies = () => {
       .then((res) => {
         console.log(res);
         setFilmovi(res.data);
+        setTotalPages(res.headers["total-pages"]);
+        setPageNo(pageNo);
       })
       .catch((err) => {
         console.log(err);
         alert("Couldn't fetch movies");
       });
   }
+
+  const changePage = (direction) => {
+    const page = pageNo + direction;
+    getMovies(page);
+}
 
   return (
     <div>
@@ -124,10 +134,12 @@ const Movies = () => {
             ></Form.Control>
           </Form.Group>
           <br></br>
-          <Button onClick={getMovies}>Search</Button>
+          <Button  onClick={getMovies}>Search</Button>
         </Form>
       </Collapse>
       <MoviesList movies={filmovi} />
+      <Button disabled={pageNo==0} onClick={()=>changePage(-1)}>Previous</Button>
+      <Button disabled={totalPages==pageNo+1}onClick={()=>changePage(1)}>Next</Button>
     </div>
   );
 };
