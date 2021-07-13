@@ -42,21 +42,21 @@ class Reservation extends React.Component {
       });
   }
 
-  getSedista(salaId) {
-    FrontAxios.get("/sale/" + salaId)
-      .then((res) => {
-        // handle success
-        console.log(res);
-        this.setState({
-          sedista: res.data,
-        });
-      })
-      .catch((error) => {
-        // handle error
-        console.log(error);
-        alert("Error occured please try again!");
-      });
-  }
+  // getSedista(salaId) {
+  //   FrontAxios.get("/sale/" + salaId)
+  //     .then((res) => {
+  //       // handle success
+  //       console.log(res);
+  //       this.setState({
+  //         sedista: res.data,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       // handle error
+  //       console.log(error);
+  //       alert("Error occured please try again!");
+  //     });
+  // }
 
   async getSedista(salaId) {
     try {
@@ -101,12 +101,7 @@ class Reservation extends React.Component {
     }));
   };
 
-  klubSelectionChanged(e) {
-    // console.log(e);
 
-    let klubId = e.target.value;
-    this.setState((klubId = klubId));
-  }
 
   render() {
     return (

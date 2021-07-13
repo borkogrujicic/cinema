@@ -1,5 +1,8 @@
 package com.ftninformatika.jwd.support;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -16,5 +19,16 @@ public class TipToTipDto implements Converter<Tip, TipDTO>{
 		dto.setNaziv(tip.getNaziv());
 		return dto;
 	}
+	
+    public List<TipDTO> convert(List<Tip> tipovi){
+        List<TipDTO> dtos = new ArrayList<>();
+
+        for(Tip k : tipovi) {
+        	TipDTO dto = convert(k);
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
 
 }

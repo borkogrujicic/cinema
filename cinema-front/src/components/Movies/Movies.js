@@ -20,22 +20,22 @@ const Movies = () => {
 
   const searchNazivValueInputChange = (event) => {
     setNazivSearch(event.target.value);
-    getMovies();
+    getMovies(pageNo);
   };
 
   const searchZanroviValueInputChange = (event) => {
     setZanroviSearch(event.target.value);
-    getMovies();
+    getMovies(pageNo);
   };
 
   const minDurationChange = (event) => {
     setTrajanjeOd(event.target.value);
-    getMovies();
+    getMovies(pageNo);
   };
 
   const maxDurationChange = (event) => {
     setTrajanjeDo(event.target.value);
-    getMovies();
+    getMovies(pageNo);
   };
 
   const addMovieHandler = (movie) => {

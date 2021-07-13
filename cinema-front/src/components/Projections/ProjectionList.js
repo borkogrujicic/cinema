@@ -10,8 +10,9 @@ const Projections = (props) => {
     history.push("/projekcije/rezervisi/" + id);
   };
 
-
-
+  const goToAdd = () => {
+    history.push('projekcije/dodavanje')
+  }
 
 
   const remove = (id) => {
@@ -31,8 +32,8 @@ const Projections = (props) => {
 
   return (
     <div>
+      <Button onClick={() => goToAdd()}>Dodaj projekciju</Button>
       <h1>Projekcije</h1>
-
       <Table bordered striped style={{ marginTop: 5 }}>
         <thead className="thead-dark">
           <tr>

@@ -14,18 +14,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftninformatika.jwd.model.Sala;
 import com.ftninformatika.jwd.model.Sediste;
+import com.ftninformatika.jwd.model.Tip;
+import com.ftninformatika.jwd.service.SalaService;
 import com.ftninformatika.jwd.service.SedisteService;
+import com.ftninformatika.jwd.support.SalaToSalaDto;
 import com.ftninformatika.jwd.support.SedisteToSedisteDto;
+import com.ftninformatika.jwd.web.dto.SalaDTO;
 import com.ftninformatika.jwd.web.dto.SedisteDTO;
+import com.ftninformatika.jwd.web.dto.TipDTO;
 
 @RestController
 @RequestMapping(value = "/api/sale", produces = MediaType.APPLICATION_JSON_VALUE)
 @Validated
 public class SalaController {
 	
-//	@Autowired
-//	private SalaService salaService;
+	@Autowired
+	private SalaService salaService;
+	
+	@Autowired
+	private SalaToSalaDto toDto;
 	
 	@Autowired
 	private SedisteService sedisteService;
@@ -39,5 +48,13 @@ public class SalaController {
 
         return new ResponseEntity<>(toSedisteDto.convert(projekcije), HttpStatus.OK);
     }
+    
+	@GetMapping
+    public ResponseEntity<List<SalaDTO>> getAll(){
+
+	        List <Sala> sale = salaService.findAll();
+
+	        return new ResponseEntity<>(toDto.convert(sale), HttpStatus.OK);
+	    }
 
 }
