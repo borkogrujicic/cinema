@@ -11,9 +11,8 @@ const Projections = (props) => {
   };
 
   const goToAdd = () => {
-    history.push('projekcije/dodavanje')
-  }
-
+    history.push("projekcije/dodavanje");
+  };
 
   const remove = (id) => {
     FrontAxios.delete("/projekcije/" + id)
@@ -32,8 +31,14 @@ const Projections = (props) => {
 
   return (
     <div>
-      <Button onClick={() => goToAdd()}>Dodaj projekciju</Button>
       <h1>Projekcije</h1>
+      {window.localStorage["role"] === "ROLE_ADMIN"
+        ? [
+            <Button variant="success" onClick={() => goToAdd()}>
+              Dodaj projekciju
+            </Button>,
+          ]
+        : null}
       <Table bordered striped style={{ marginTop: 5 }}>
         <thead className="thead-dark">
           <tr>
