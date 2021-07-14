@@ -22,11 +22,6 @@ const NewProjection = (props) => {
     getTipovi();
   }, []);
 
-  const history = useHistory;
-
-  // const goToProjekcije = () => {
-  //   history.push("/projekcije");
-  // };
 
   function getFilmovi() {
     FrontAxios.get("/filmovi")
@@ -145,6 +140,7 @@ const NewProjection = (props) => {
       .then((res) => {
         console.log(res);
         alert("Projection added succesffully");
+        props.history.push('/projekcije');
       })
       .catch((err) => {
         console.log(err);
