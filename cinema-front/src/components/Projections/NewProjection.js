@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
 
+import styles from "./NewProjection.module.css";
+
 const NewProjection = (props) => {
   const [filmovi, setFilmovi] = useState([]);
   const [sale, setSale] = useState([]);
@@ -22,9 +24,9 @@ const NewProjection = (props) => {
 
   const history = useHistory;
 
-  const goToProjekcije = () => {
-    history.push("/projekcije");
-  };
+  // const goToProjekcije = () => {
+  //   history.push("/projekcije");
+  // };
 
   function getFilmovi() {
     FrontAxios.get("/filmovi")
@@ -65,12 +67,12 @@ const NewProjection = (props) => {
   const movieSelectionChanged = (e) => {
     // console.log(e);
 
+    if (e.target.value.trim().length > 0) {
+      setIsDataValid(true);
+    }
+
     let movieId = e.target.value;
     let movie = filmovi.find((movie) => movie.id == movieId);
-
-    if (e.target.value === null) {
-      setIsDataValid(false);
-    }
 
     setFilm(movie);
   };
@@ -78,12 +80,12 @@ const NewProjection = (props) => {
   const tipSelectionChange = (e) => {
     // console.log(e);
 
+    if (e.target.value.trim().length > 0) {
+      setIsDataValid(true);
+    }
+
     let tipId = e.target.value;
     let tip = tipovi.find((tip) => tip.id == tipId);
-
-    if (e.target.value === null) {
-      setIsDataValid(false)
-    }
 
     setTip(tip);
   };
@@ -91,29 +93,26 @@ const NewProjection = (props) => {
   const salaSelectionChange = (e) => {
     // console.log(e);
 
+    if (e.target.value.trim().length > 0) {
+      setIsDataValid(true);
+    }
+
     let salaId = e.target.value;
     let sala = sale.find((sala) => sala.id == salaId);
-
-    if (e.target.value === null) {
-      setIsDataValid(false)
-    }
 
     setSala(sala);
   };
 
   const cenaChangeHandler = (event) => {
-
-    if (event.target.value < 1) {
-      setIsDataValid(false)
+    if (event.target.value.trim().length > 0) {
+      setIsDataValid(true);
     }
-
     setCena(event.target.value);
   };
 
   const dateTimeChangeHaldner = (event) => {
-
-    if (event.target.value == '') {
-      setIsDataValid(false)
+    if (event.target.value.trim().length > 0) {
+      setIsDataValid(true);
     }
     setDatumIVreme(event.target.value);
   };
@@ -121,8 +120,15 @@ const NewProjection = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (isDataValid === false) {
-      alert("Podaci koje ste uneli nisu validni");
+    if (
+      film === null ||
+      tip === null ||
+      sala === null ||
+      datumIVreme.trim().length === 0 ||
+      cena < 1
+    ) {
+      setIsDataValid(false);
+      alert("Podaci nisu validni!");
       return;
     }
 
@@ -139,7 +145,6 @@ const NewProjection = (props) => {
       .then((res) => {
         console.log(res);
         alert("Projection added succesffully");
-        goToProjekcije();
       })
       .catch((err) => {
         console.log(err);
@@ -148,8 +153,12 @@ const NewProjection = (props) => {
   };
 
   return (
-    <div>
-      <Form>
+    <Form onSubmit={submitHandler}>
+      <div
+        className={`${styles["form-control"]} ${
+          !isDataValid && styles.invalid
+        }`}
+      >
         <Form.Group>
           <Form.Label htmlFor="pMovie">Film</Form.Label>
           <Form.Control
@@ -218,11 +227,11 @@ const NewProjection = (props) => {
             onChange={dateTimeChangeHaldner}
           />
         </Form.Group>
-        <Button varriant="info" onClick={submitHandler}>
-          Dodaj
-        </Button>
-      </Form>
-    </div>
+      </div>
+      <Button type="submit" varriant="info">
+        Dodaj
+      </Button>
+    </Form>
   );
 };
 
