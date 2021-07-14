@@ -12,8 +12,7 @@ const NewProjection = (props) => {
   const [tip, setTip] = useState({});
   const [datumIVreme, setDatumIVreme] = useState("");
   const [cena, setCena] = useState("");
-
-  
+  const [isDataValid, setIsDataValid] = useState(true);
 
   useEffect(() => {
     getFilmovi();
@@ -23,9 +22,9 @@ const NewProjection = (props) => {
 
   const history = useHistory;
 
-  const goToProjekcije = () =>{
-    history.push('/projekcije')
-  }
+  const goToProjekcije = () => {
+    history.push("/projekcije");
+  };
 
   function getFilmovi() {
     FrontAxios.get("/filmovi")
@@ -38,7 +37,6 @@ const NewProjection = (props) => {
         alert("Couldn't fetch movies");
       });
   }
-  
 
   function getSale() {
     FrontAxios.get("/sale")
@@ -70,6 +68,10 @@ const NewProjection = (props) => {
     let movieId = e.target.value;
     let movie = filmovi.find((movie) => movie.id == movieId);
 
+    if (e.target.value === null) {
+      setIsDataValid(false);
+    }
+
     setFilm(movie);
   };
 
@@ -78,6 +80,10 @@ const NewProjection = (props) => {
 
     let tipId = e.target.value;
     let tip = tipovi.find((tip) => tip.id == tipId);
+
+    if (e.target.value === null) {
+      setIsDataValid(false)
+    }
 
     setTip(tip);
   };
@@ -88,19 +94,37 @@ const NewProjection = (props) => {
     let salaId = e.target.value;
     let sala = sale.find((sala) => sala.id == salaId);
 
+    if (e.target.value === null) {
+      setIsDataValid(false)
+    }
+
     setSala(sala);
   };
 
   const cenaChangeHandler = (event) => {
+
+    if (event.target.value < 1) {
+      setIsDataValid(false)
+    }
+
     setCena(event.target.value);
   };
 
   const dateTimeChangeHaldner = (event) => {
+
+    if (event.target.value == '') {
+      setIsDataValid(false)
+    }
     setDatumIVreme(event.target.value);
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (isDataValid === false) {
+      alert("Podaci koje ste uneli nisu validni");
+      return;
+    }
 
     const projekcija = {
       params: {
@@ -115,7 +139,7 @@ const NewProjection = (props) => {
       .then((res) => {
         console.log(res);
         alert("Projection added succesffully");
-        goToProjekcije()
+        goToProjekcije();
       })
       .catch((err) => {
         console.log(err);
@@ -194,7 +218,9 @@ const NewProjection = (props) => {
             onChange={dateTimeChangeHaldner}
           />
         </Form.Group>
-        <Button onClick={submitHandler}>Add</Button>
+        <Button varriant="info" onClick={submitHandler}>
+          Dodaj
+        </Button>
       </Form>
     </div>
   );
