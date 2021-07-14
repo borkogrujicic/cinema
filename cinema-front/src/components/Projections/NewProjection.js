@@ -115,6 +115,32 @@ const NewProjection = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
+    // if (film === null) {
+    //   setIsDataValid(false);
+    //   alert ('Niste odabrali film!');
+    //   return;
+    // }
+    // if (tip === null) {
+    //   setIsDataValid(false);
+    //   alert ('Niste odabrali tip!');
+    //   return;
+    // }
+    // if (sala === null) {
+    //   setIsDataValid(false);
+    //   alert ('Niste odabrali salu!');
+    //   return;
+    // }
+    // if (datumIVreme.trim().length === 0) {
+    //   setIsDataValid(false);
+    //   alert('Niste uneli datum i vreme!')
+    //   return;
+    // }
+    // if (cena < 1) {
+    //   setIsDataValid(false);
+    //   alert('Cena mora biti veca od 0!')
+    //   return;
+    // }
+
     if (
       film === null ||
       tip === null ||
