@@ -115,7 +115,7 @@ public class ProjekcijeController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Total-Pages", Integer.toString(projekcije.getTotalPages()));
 
-        return new ResponseEntity<>(toDto.convert(projekcije.getContent()), HttpStatus.OK);
+        return new ResponseEntity<>(toDto.convert(projekcije.getContent()), headers, HttpStatus.OK);
     }
 
 //    private LocalDateTime getLocalDateTime(String datumIVreme) throws DateTimeParseException {
