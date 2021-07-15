@@ -8,7 +8,7 @@ const Movie = (props) => {
 
   useEffect(() => {
     getMovieById(props.match.params.id);
-    getProjections();
+    getProjections(props.match.params.id);
   }, []);
 
   const getMovieById = (id) => {
@@ -43,26 +43,30 @@ const Movie = (props) => {
     <div>
       <Table>
         <thead>
-          <th>Naziv</th>
-          <th>Reziser</th>
-          <th>Glumci</th>
-          <th>Zanrovi</th>
-          <th>Trajanje</th>
-          <th>Distributer</th>
-          <th>Zemlja porekla</th>
-          <th>Godina proizvodnje</th>
-          <th>Opis</th>
+          <tr>
+            <th>Naziv</th>
+            <th>Reziser</th>
+            <th>Glumci</th>
+            <th>Zanrovi</th>
+            <th>Trajanje</th>
+            <th>Distributer</th>
+            <th>Zemlja porekla</th>
+            <th>Godina proizvodnje</th>
+            <th>Opis</th>
+          </tr>
         </thead>
         <tbody>
-          <td>{film.naziv}</td>
-          <td>{film.reziser}</td>
-          <td>{film.glumci}</td>
-          <td>{film.zanrovi}</td>
-          <td>{film.trajanje}</td>
-          <td>{film.distributer}</td>
-          <td>{film.zemljaPorekla}</td>
-          <td>{film.godinaProizvodnje}</td>
-          <td>{film.opis}</td>
+          <tr>
+            <td>{film.naziv}</td>
+            <td>{film.reziser}</td>
+            <td>{film.glumci}</td>
+            <td>{film.zanrovi}</td>
+            <td>{film.trajanje}</td>
+            <td>{film.distributer}</td>
+            <td>{film.zemljaPorekla}</td>
+            <td>{film.godinaProizvodnje}</td>
+            <td>{film.opis}</td>
+          </tr>
         </tbody>
       </Table>
     </div>
