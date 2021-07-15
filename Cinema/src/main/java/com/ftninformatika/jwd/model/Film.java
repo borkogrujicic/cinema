@@ -1,7 +1,8 @@
 package com.ftninformatika.jwd.model;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,7 +56,7 @@ public class Film {
     private String opis;
     
     @OneToMany(mappedBy = "film", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Projekcija> projekcije = new ArrayList<>();
+    private Set<Projekcija> projekcije = new HashSet<>();
     
     @Column
     private boolean deleted = Boolean.FALSE;
@@ -144,11 +145,11 @@ public class Film {
 		this.opis = opis;
 	}
 
-	public List<Projekcija> getProjekcije() {
+	public Set<Projekcija> getProjekcije() {
 		return projekcije;
 	}
 
-	public void setProjekcije(List<Projekcija> projekcije) {
+	public void setProjekcije(Set<Projekcija> projekcije) {
 		this.projekcije = projekcije;
 	}
 

@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Table, Button } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
 
 const Movie = (props) => {
   const [film, setFilm] = useState({});
-  const [projekcije, setProjekcije] = [];
+  const [projekcije, setProjekcije] = useState([]);
+
+  let history = useHistory();
 
   useEffect(() => {
+    getData();
+  }, []);
+
+  function getData() {
     getMovieById(props.match.params.id);
     getProjections(props.match.params.id);
-  }, []);
+  }
 
   const getMovieById = (id) => {
     FrontAxios.get("/filmovi/" + id)
@@ -30,13 +37,17 @@ const Movie = (props) => {
       .then((res) => {
         // handle success
         console.log(res);
-        setProjekcije(res.data);
+        setProjekcije((result) => [...result, res.data]);
       })
       .catch((error) => {
         // handle error
         console.log(error);
         alert("Error occured please try again!");
       });
+  };
+
+  const goToReservation = (id) => {
+    history.push("/projekcije/rezervisi/" + id);
   };
 
   return (
@@ -68,6 +79,37 @@ const Movie = (props) => {
             <td>{film.opis}</td>
           </tr>
         </tbody>
+      </Table>
+      <Table>
+        <thead>
+          <tr>
+            <th>Tip projekcije</th>
+            <th>Sala</th>
+            <th>Datum i vreme</th>
+            <th>Cena karte</th>
+          </tr>
+        </thead>
+        <tr>
+          <tbody>
+            {projekcije.map((projekcija, index) => (
+              <tr>
+                <td>{projekcija.cena}</td>
+                {window.localStorage["role"] === "ROLE_KORISNIK"
+                  ? [
+                      <td>
+                        <Button
+                          variant="success"
+                          onClick={() => goToReservation(projekcija.id)}
+                        >
+                          Rezervisi
+                        </Button>
+                      </td>,
+                    ]
+                  : null}
+              </tr>
+            ))}
+          </tbody>
+        </tr>
       </Table>
     </div>
   );
