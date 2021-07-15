@@ -3,6 +3,7 @@ package com.ftninformatika.jwd.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,10 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftninformatika.jwd.model.Film;
+import com.ftninformatika.jwd.model.Projekcija;
 import com.ftninformatika.jwd.service.FilmService;
+import com.ftninformatika.jwd.service.ProjekcijaService;
 import com.ftninformatika.jwd.support.FilmDtoToFilm;
 import com.ftninformatika.jwd.support.FilmToFilmDto;
+import com.ftninformatika.jwd.support.ProjekcijaToProjekcijaDto;
 import com.ftninformatika.jwd.web.dto.FilmDTO;
+import com.ftninformatika.jwd.web.dto.ProjekcijaDTO;
 
 @RestController
 @RequestMapping(value = "/api/filmovi", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -36,10 +41,18 @@ public class FilmoviController {
 	private FilmService filmService;
 	
 	@Autowired
+	private ProjekcijaService projekcijaService;
+	
+	@Autowired
 	private FilmToFilmDto toDto;
 	
 	@Autowired
 	private FilmDtoToFilm toFilm;
+	
+	@Autowired
+	private ProjekcijaToProjekcijaDto toProjekcijaDto;
+	
+
 	
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FilmDTO> create(@Valid @RequestBody FilmDTO filmDTO){
@@ -100,5 +113,12 @@ public class FilmoviController {
         headers.add("Total-Pages", Integer.toString(filmovi.getTotalPages()));
 
         return new ResponseEntity<>(toDto.convert(filmovi.getContent()), headers,  HttpStatus.OK);
+    }
+    
+    @GetMapping("/{id}/projekcije")
+    public ResponseEntity<List<ProjekcijaDTO>> findByFilmId(@PathVariable @Positive(message = "Id must be positive.")  Long id){
+        List<Projekcija> projekcije = projekcijaService.findByFilmId(id);
+
+        return new ResponseEntity<>(toProjekcijaDto.convert(projekcije), HttpStatus.OK);
     }
 }
