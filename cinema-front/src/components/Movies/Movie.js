@@ -7,7 +7,7 @@ const Movie = (props) => {
   const [projekcije, setProjekcije] = [];
 
   useEffect(() => {
-    getMovieById(props.id);
+    getMovieById(props.match.params.id);
     getProjections();
   }, []);
 

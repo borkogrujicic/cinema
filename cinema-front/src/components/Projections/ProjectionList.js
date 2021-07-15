@@ -14,6 +14,10 @@ const Projections = (props) => {
     history.push("projekcije/dodavanje");
   };
 
+  const goToMovie = id => {
+    history.push("filmovi/" + id)
+  }
+
   const remove = (id) => {
     FrontAxios.delete("/projekcije/" + id)
       .then((res) => {
@@ -29,9 +33,6 @@ const Projections = (props) => {
       });
   };
 
-  const goToMovie = (id) => {
-    props.history.push("/filmovi/" + id);
-  };
 
   return (
     <div>
@@ -62,7 +63,7 @@ const Projections = (props) => {
         <tbody>
           {props.projections.map((projection) => (
             <tr key={props.id}>
-              <td onClick={goToMovie(projection.film.id)}>
+              <td>
                 {projection.film.naziv}
               </td>
               <td>{projection.tip.naziv}</td>
@@ -93,6 +94,7 @@ const Projections = (props) => {
                     </td>,
                   ]
                 : null}
+                <td><Button varriant="light" onClick={() => goToMovie(projection.film.id)}>Movie details</Button></td>
             </tr>
           ))}
         </tbody>
