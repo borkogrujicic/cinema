@@ -29,6 +29,10 @@ const Projections = (props) => {
       });
   };
 
+  const goToMovie = (id) => {
+    props.history.push("/filmovi/" + id);
+  };
+
   return (
     <div>
       <h1>Projekcije</h1>
@@ -58,7 +62,9 @@ const Projections = (props) => {
         <tbody>
           {props.projections.map((projection) => (
             <tr key={props.id}>
-              <td>{projection.film.naziv}</td>
+              <td onClick={goToMovie(projection.film.id)}>
+                {projection.film.naziv}
+              </td>
               <td>{projection.tip.naziv}</td>
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>

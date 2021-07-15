@@ -11,6 +11,8 @@ import Projections from "./components/Projections/Projections";
 import Movies from "./components/Movies/Movies";
 import Rezervacija from "./components/Projections/Rezervacija";
 import NewProjection from "./components/Projections/NewProjection";
+import Movie from "./components/Movies/Movie";
+
 
 
 const App = () => {
@@ -45,6 +47,7 @@ const App = () => {
             <Route exact path="/projekcije/dodavanje" component={NewProjection} />
             <Route exact path="/projekcije/rezervacije/:projekcijaId" component={Rezervacija} />
             <Route exact path="/filmovi" component={Movies} />
+            <Route exact path="/filmovi/:id" component={Movie} />
             <Route exact path="/login" component={Login} />
             <Route component={NotFound} />
           </Switch>
