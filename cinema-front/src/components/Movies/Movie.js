@@ -80,36 +80,29 @@ const Movie = (props) => {
           </tr>
         </tbody>
       </Table>
-      <Table>
-        <thead>
+      <Table bordered striped style={{ marginTop: 5 }}>
+        <thead className="thead-dark">
           <tr>
+            <th>Film</th>
             <th>Tip projekcije</th>
             <th>Sala</th>
             <th>Datum i vreme</th>
             <th>Cena karte</th>
+            {window.localStorage["role"] === "ROLE_KORISNIK"
+              ? [<th>Rezervisi</th>]
+              : null}
+            {window.localStorage["role"] === "ROLE_ADMIN"
+              ? [<th>Delete</th>]
+              : null}
           </tr>
         </thead>
-        <tr>
-          <tbody>
-            {projekcije.map((projekcija, index) => (
-              <tr>
-                <td>{projekcija.cena}</td>
-                {window.localStorage["role"] === "ROLE_KORISNIK"
-                  ? [
-                      <td>
-                        <Button
-                          variant="success"
-                          onClick={() => goToReservation(projekcija.id)}
-                        >
-                          Rezervisi
-                        </Button>
-                      </td>,
-                    ]
-                  : null}
-              </tr>
-            ))}
-          </tbody>
-        </tr>
+        <tbody>
+          {projekcije.map((projection) => (
+            <tr key={projection.id}>
+              <td>{film.naziv}</td>
+            </tr>
+          ))}
+        </tbody>
       </Table>
     </div>
   );

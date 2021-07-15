@@ -58,6 +58,7 @@ const Projections = (props) => {
             {window.localStorage["role"] === "ROLE_ADMIN"
               ? [<th>Delete</th>]
               : null}
+              <th>Detalji filma</th>
           </tr>
         </thead>
         <tbody>
