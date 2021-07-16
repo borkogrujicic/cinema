@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
 
 const MovieProjections = (props) => {
+  let history = useHistory();
+
+  const goToReservation = (id) => {
+    history.push("/projekcije/rezervisi/" + id);
+  };
 
   return (
     <React.Fragment>
@@ -25,11 +31,20 @@ const MovieProjections = (props) => {
               <td>{projection.sala.naziv}</td>
               <td>{projection.datumIVreme}</td>
               <td>{projection.cena}</td>
+              {window.localStorage["role"] === "ROLE_KORISNIK"
+                ? [
+                    <td>
+                      <Button onClick={() => goToReservation(projection.id)}>
+                        Rezervisi
+                      </Button>
+                    </td>,
+                  ]
+                : null}
             </tr>
           ))}
         </tbody>
       </Table>
-      </React.Fragment>
+    </React.Fragment>
   );
 };
 

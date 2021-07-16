@@ -56,7 +56,7 @@ const Movie = (props) => {
 
   return (
     <div>
-      <Table class="table table-dark">
+      <Table className="table table-striped table-dark">
         <thead>
           <tr>
             <th>Naziv</th>
@@ -83,7 +83,9 @@ const Movie = (props) => {
             <td>{film.opis}</td>
           </tr>
         </tbody>
+        
       </Table>
+      <h3>Projekcije</h3>
       <MovieProjections projections={projekcije} />
     </div>
   );
