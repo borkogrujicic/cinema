@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Table, Button } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
+import MovieProjections from "./MovieProjections";
+
 
 const Movie = (props) => {
   const [film, setFilm] = useState({});
@@ -14,8 +16,8 @@ const Movie = (props) => {
   }, []);
 
   function getData() {
-    getMovieById(props.match.params.id);
     getProjections(props.match.params.id);
+    getMovieById(props.match.params.id);
   }
 
   const getMovieById = (id) => {
@@ -37,7 +39,9 @@ const Movie = (props) => {
       .then((res) => {
         // handle success
         console.log(res);
-        setProjekcije((result) => [...result, res.data]);
+        // setProjekcije((result) => [...result, res.data]);
+        setProjekcije(res.data);
+        console.log(projekcije)
       })
       .catch((error) => {
         // handle error
@@ -52,7 +56,7 @@ const Movie = (props) => {
 
   return (
     <div>
-      <Table>
+      <Table class="table table-dark">
         <thead>
           <tr>
             <th>Naziv</th>
@@ -80,30 +84,7 @@ const Movie = (props) => {
           </tr>
         </tbody>
       </Table>
-      <Table bordered striped style={{ marginTop: 5 }}>
-        <thead className="thead-dark">
-          <tr>
-            <th>Film</th>
-            <th>Tip projekcije</th>
-            <th>Sala</th>
-            <th>Datum i vreme</th>
-            <th>Cena karte</th>
-            {window.localStorage["role"] === "ROLE_KORISNIK"
-              ? [<th>Rezervisi</th>]
-              : null}
-            {window.localStorage["role"] === "ROLE_ADMIN"
-              ? [<th>Delete</th>]
-              : null}
-          </tr>
-        </thead>
-        <tbody>
-          {projekcije.map((projection) => (
-            <tr key={projection.id}>
-              <td>{film.naziv}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <MovieProjections projections={projekcije} />
     </div>
   );
 };
