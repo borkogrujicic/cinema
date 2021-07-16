@@ -3,6 +3,8 @@ import React from "react";
 import { Table, Button } from "react-bootstrap";
 import FrontAxios from "../../apis/FrontAxios";
 
+import './ProjectionList.css';
+
 const Projections = (props) => {
   let history = useHistory();
 
@@ -64,7 +66,7 @@ const Projections = (props) => {
         <tbody>
           {props.projections.map((projection) => (
             <tr key={props.id}>
-              <td>
+              <td className="goTo" onClick={() => goToMovie(projection.film.id)}>
                 {projection.film.naziv}
               </td>
               <td>{projection.tip.naziv}</td>
@@ -95,7 +97,7 @@ const Projections = (props) => {
                     </td>,
                   ]
                 : null}
-                <td><Button varriant="light" onClick={() => goToMovie(projection.film.id)}>Movie details</Button></td>
+                <td><Button variant="info" onClick={() => goToMovie(projection.film.id)}>Detalji filma</Button></td>
             </tr>
           ))}
         </tbody>
