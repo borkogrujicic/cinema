@@ -9,7 +9,7 @@ import Login from "./components/Login/Login";
 import Home from "./components/Home";
 import Projections from "./components/Projections/Projections";
 import Movies from "./components/Movies/Movies";
-import Rezervacija from "./components/Projections/Rezervacija";
+import Rezervacija from "./components/Projections/Reservation";
 import NewProjection from "./components/Projections/NewProjection";
 import Movie from "./components/Movies/Movie";
 
@@ -45,7 +45,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/projekcije" component={Projections} />
             <Route exact path="/projekcije/dodavanje" component={NewProjection} />
-            <Route exact path="/projekcije/rezervacije/:projekcijaId" component={Rezervacija} />
+            <Route exact path="/projekcije/rezervisi/:projekcijaId" component={Rezervacija} />
             <Route exact path="/filmovi" component={Movies} />
             <Route exact path="/filmovi/:id" component={Movie} />
             <Route exact path="/login" component={Login} />
