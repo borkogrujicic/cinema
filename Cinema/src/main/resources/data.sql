@@ -37,7 +37,7 @@ INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_
 INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`, deleted) VALUES (2, '350', '2022-06-21 22:00', 2, 1, 2, 0);
 INSERT INTO projekcija (`id`, `cena`, `datum_vreme`, `film_id`, `sala_id`, `tip_id`, deleted) VALUES (3, '350', '2022-06-22 22:00', 2, 2, 2, 0);
 
-INSERT INTO karta (`id`, `datum`, `projekcija_id`, `sediste_id`) VALUES (1, '2020-06-20 20:00', 1, 1);
+INSERT INTO karta (`id`, `datum`, `projekcija_id`) VALUES (1, '2020-06-20 20:00', 1);
 
 
 

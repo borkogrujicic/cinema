@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Sediste {
@@ -17,7 +16,7 @@ public class Sediste {
 	@ManyToOne
 	private Sala sala;
 	
-	@OneToOne(mappedBy = "sediste")
+	@ManyToOne
 	private Karta karta;
 
 	public Sediste() {

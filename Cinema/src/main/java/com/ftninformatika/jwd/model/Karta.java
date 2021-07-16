@@ -1,6 +1,8 @@
 package com.ftninformatika.jwd.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,9 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Karta {
@@ -22,9 +23,8 @@ public class Karta {
     @ManyToOne
     private Projekcija projekcija;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sediste_id", referencedColumnName = "id")
-    private Sediste sediste;
+    @OneToMany(mappedBy = "karta", cascade = CascadeType.ALL)
+    private List <Sediste> sediste = new ArrayList <> ();
     
     @Column
     private LocalDate datum;
@@ -48,12 +48,13 @@ public class Karta {
 	public void setProjekcija(Projekcija projekcija) {
 		this.projekcija = projekcija;
 	}
+	
 
-	public Sediste getSediste() {
+	public List<Sediste> getSediste() {
 		return sediste;
 	}
 
-	public void setSediste(Sediste sediste) {
+	public void setSediste(List<Sediste> sediste) {
 		this.sediste = sediste;
 	}
 
