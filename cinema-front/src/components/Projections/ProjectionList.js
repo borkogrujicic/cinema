@@ -60,7 +60,6 @@ const Projections = (props) => {
             {window.localStorage["role"] === "ROLE_ADMIN"
               ? [<th>Delete</th>]
               : null}
-              <th>Detalji filma</th>
           </tr>
         </thead>
         <tbody>
@@ -97,7 +96,6 @@ const Projections = (props) => {
                     </td>,
                   ]
                 : null}
-                <td><Button variant="info" onClick={() => goToMovie(projection.film.id)}>Detalji filma</Button></td>
             </tr>
           ))}
         </tbody>
