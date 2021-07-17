@@ -3,6 +3,7 @@ package com.ftninformatika.jwd.support;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,9 @@ import com.ftninformatika.jwd.web.dto.KartaDTO;
 
 @Component
 public class KartaToKartaDto implements Converter<Karta, KartaDTO>{
+	
+	@Autowired
+	private SedisteToSedisteDto toSedisteDto;
 	
 
 	@Override
@@ -21,7 +25,7 @@ public class KartaToKartaDto implements Converter<Karta, KartaDTO>{
 		dto.setProjekcijaDatum(karta.getProjekcija().getDatumIVreme().toString());
 		dto.setProjekcijaFilm(karta.getProjekcija().getFilm().getNaziv());
 		dto.setProjekcijaId(karta.getProjekcija().getId());
-		dto.setSedisteId(karta.getSediste().getId());
+		dto.setSedista(toSedisteDto.convert(karta.getSediste()));
 		return dto;
 	}
 	

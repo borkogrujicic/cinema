@@ -25,6 +25,9 @@ public class KartaDtoToKarta implements Converter<KartaDTO, Karta>{
 	
 	@Autowired
 	private SedisteService sedisteService;
+	
+	@Autowired
+	private SedisteDtoToSediste toSediste;
 
 	@Override
 	public Karta convert(KartaDTO dto) {
@@ -40,7 +43,7 @@ public class KartaDtoToKarta implements Converter<KartaDTO, Karta>{
 		
 		karta.setDatum(LocalDate.now());
 		karta.setProjekcija(projekcijaService.findOne(dto.getProjekcijaId()));
-		karta.setSediste(sedisteService.findOne(dto.getSedisteId()));
+		karta.setSediste(toSediste.convert(dto.getSedista()));
 	
 		return karta;
 	}

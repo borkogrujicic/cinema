@@ -1,9 +1,12 @@
 package com.ftninformatika.jwd.web.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class KartaDTO {
 	
-	private Long id;
-	private Long sedisteId;
+	private Long id;	
+	private List <SedisteDTO> sedista = new ArrayList<>();
 	private Long projekcijaId;
 	private String projekcijaDatum;
 	private String projekcijaFilm;
@@ -53,14 +56,14 @@ public class KartaDTO {
 		this.projekcijaFilm = projekcijaFilm;
 	}
 
-	public Long getSedisteId() {
-		return sedisteId;
+	public List<SedisteDTO> getSedista() {
+		return sedista;
 	}
 
-	public void setSedisteId(Long sedisteId) {
-		this.sedisteId = sedisteId;
+	public void setSedista(List<SedisteDTO> sedista) {
+		this.sedista = sedista;
 	}
-	
+
 	
 
 
