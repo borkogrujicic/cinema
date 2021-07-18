@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ProjectionList from "./ProjectionList";
 import FrontAxios from "../../apis/FrontAxios";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const Projections = () => {
   const [projekcije, setProjekcije] = useState([]);
   const [pageNo, setPageNo] = useState("");
   const [totalPages, setTotalPages] = useState("");
+  const [showSearchForm, setShowSearchForm] = useState(false);
 
   useEffect(() => {
     getProjections(0);
@@ -38,6 +39,13 @@ const Projections = () => {
 
   return (
     <div>
+      <Form.Group style={{ marginTop: 35 }}>
+        <Form.Check
+          type="checkbox"
+          label="Show search form"
+          onClick={(event) => setShowSearchForm(event.target.checked)}
+        />
+      </Form.Group>
       <ProjectionList projections={projekcije} />
       <Button disabled={pageNo == 0} onClick={() => changePage(-1)}>
         Previous
