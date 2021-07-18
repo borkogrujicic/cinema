@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProjectionList from "./ProjectionList";
 import FrontAxios from "../../apis/FrontAxios";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Collapse } from "react-bootstrap";
 
 const Projections = () => {
   const [projekcije, setProjekcije] = useState([]);
@@ -46,6 +46,30 @@ const Projections = () => {
           onClick={(event) => setShowSearchForm(event.target.checked)}
         />
       </Form.Group>
+      <Collapse in={showSearchForm}>
+              <Form style={{ marginTop: 10 }}>
+          <Form.Group>
+            <Form.Label>Naziv filma</Form.Label>
+            <Form.Control
+              name="naziv"
+              as="input"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Label htmlFor="pTip">Tip projekcije</Form.Label>
+              <Form.Control
+                name="tip"
+                as="select"
+                id="tip"
+                // onChange={(e) => ValueInputChange(e)}
+              >
+                <option></option>
+                <option value="2D">2D</option>
+                <option value="3D">3D</option>
+                <option value="4D">4D</option>
+              </Form.Control>
+          </Form>
+
+      </Collapse> 
       <ProjectionList projections={projekcije} />
       <Button disabled={pageNo == 0} onClick={() => changePage(-1)}>
         Previous
